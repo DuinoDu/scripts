@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]
+    then
+        echo "Usage: runopencv [xxx.cpp]"
+        exit 0
+fi
+
+g++ $1 -std=c++11 `pkg-config --cflags --libs opencv` && ./a.out $2 && rm ./a.out

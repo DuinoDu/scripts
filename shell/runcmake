@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -d .build ];then
+    cd .build
+else
+    mkdir .build
+    cd .build
+fi
+
+cmake .. > /tmp/tmp.cmake&& \
+make && \
+./a.out $1
