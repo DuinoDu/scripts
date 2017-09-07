@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Ladder Needed!"
+
 if [ ! -d ~/data/imagenet ];then
     mkdir -p ~/data/imagenet
 fi
