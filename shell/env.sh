@@ -30,7 +30,7 @@ source py2/bin/activate
 # pytorch
 cd ~
 mkdir src && cd src
-git clone https://github.com/pytorch/pytorch && cd src
+git clone --recursive https://github.com/pytorch/pytorch && cd src
 pip install numpy scipy matplotlib pandas
 pip install -r requirements.txt
 python setup.py install
