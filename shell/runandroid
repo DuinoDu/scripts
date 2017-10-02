@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# detect ANDROID_NDK
+if [ -z "$ANDROID_NDK" ]; then
+    echo "Did you set ANDROID_NDK variable?"
+    exit 1
+fi
+
+if [ -d "$ANDROID_NDK" ]; then
+    echo "Using Android ndk at $ANDROID_NDK"
+else
+    echo "Cannot find ndk: did you install it under $ANDROID_NDK?"
+    exit 1
+fi
+
+ANDROID_CMAKE=$HOME/src/caffe2/third_party/android-cmake
+if [ -d "$ANDROID_CMAKE" ]; then
+    echo "Using android-cmake at $ANDROID_CMAKE"
+else
+    echo "Cannot find ndk: did you install it under $ANDROID_CMAKE?"
+    exit 1
+fi
+
+if [ -d build ];then
+    cd build
+else
+    mkdir build
+    cd build
+fi
+
+
+cmake -DCMAKE_TOOLCHAIN_FILE=${ANDROID_CMAKE}/android.toolchain.cmake \
+      -DANDROID_NDK=$ANDROID_NDK                     \
+      -DCMAKE_BUILD_TYPE=Release                     \
+      -DANDROID_ABI="armeabi-v7a with NEON"          \
+      -DANDROID_NATIVE_API_LEVEL=21                  \
+      .. $@ || exit 1
+
+cmake --build .

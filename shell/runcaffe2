@@ -1,0 +1,24 @@
+#!/bin/bash
+
+CAFFE2_ROOT=$HOME/src/caffe2
+
+if [ $# -eq 0 ]
+    then
+        echo "Usage: runcaffe2 [xxx.cpp]"
+        exit 0
+fi
+
+g++ $1 -o demo -std=c++11 \
+    -I $CAFFE2_ROOT/third_party/eigen \
+    -lCaffe2_CPU \
+    -lglog \
+    -lgflags \
+    -lprotobuf \
+    -lpthread \
+    -llmdb \
+    -lleveldb \
+    -lopencv_core \
+    -lopencv_highgui \
+    -lopencv_imgproc 
+
+echo "Build successfully!"
