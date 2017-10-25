@@ -19,5 +19,10 @@ for i in `ls *.zip`;do
     unzip $i
 done
 
+cd /tmp
+git clone https://github.com/anewell/pose-hg-train
+cd pose-hg-train/data/mpii
+mv annot ~/data/mpii/annot_h5
+cd /tmp && rm pose-hg-train -r
 
 echo "mpii is in ~/data/mpii"
