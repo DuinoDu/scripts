@@ -23,6 +23,9 @@
 #wget "http://git.oschina.net/duino/codes/7pbqlme9ci218o4hrdztj14/raw?blob_name=vimrc" -O .vimrc
 #vim -c 'set fileformat=unix'
 #vim -c 'PluginInstall' 
+#cd ~/.vim
+#git clone https://github.com/duinodu/UltiSnips
+
 #
 ## python-env
 #cd ~
