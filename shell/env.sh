@@ -12,6 +12,7 @@
 #sudo apt-get install tmux
 #sudo apt-get install zsh
 #sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#chsh -s /bin/zsh
 #
 ## vim
 #sudo apt-get install vim-gtk
@@ -20,7 +21,8 @@
 #git clone https://github.com/gmarik/Vundle.vim.git
 #echo "copy .vimrc from http://git.oschina.net/duino/codes/7pbqlme9ci218o4hrdztj14/raw?blob_name=vimrc"
 #cd ~
-#wget "http://git.oschina.net/duino/codes/7pbqlme9ci218o4hrdztj14/raw?blob_name=vimrc" -O .vimrc
+#wget "http://git.oschina.net/duino/codes/7pbqlme9ci218o4hrdztj14/raw?blob_name=vimrc" -O ~/.vimrc
+#vim ~/.vimrc
 #vim -c 'set fileformat=unix'
 #vim -c 'PluginInstall' 
 #cd ~/.vim
