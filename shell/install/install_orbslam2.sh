@@ -15,6 +15,10 @@ sudo apt-get install -y libgtk2.0-dev libxmu-dev libxxf86vm-dev
 sudo apt-get install -y binutils-gold
 sudo apt-get install -y build-essential
 
+if [ ! -d ~/src/orbslam2 ];then
+    mkdir ~/src/orbslam2
+fi
+
 # Pangolin
 cd ~/src/orbslam2
 git clone https://github.com/stevenlovegrove/Pangolin.git
@@ -26,7 +30,7 @@ cd ~/src/orbslam2
 wget http://bitbucket.org/eigen/eigen/get/3.2.8.tar.gz
 tar zxvf 3.2.8.tar.gz
 cd eigen*
-make build && cd build && cmake .. && make && sudo make install
+mkdir build && cd build && cmake .. && make && sudo make install
 
 # BLAS and LAPACK
 sudo apt-get install -y libblas-dev
