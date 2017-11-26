@@ -1,0 +1,46 @@
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'Yggdroot/indentLine'
+Plugin 'vim-scripts/python_fold'
+
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+call vundle#end()
+filetype plugin indent on
+
+:colorscheme elflord
+set number
+set cursorline
+set tabstop=4
+set softtabstop=4
+set expandtab
+set shiftwidth=4
+set smartindent
+set foldenable
+set foldmethod=syntax
+
+"nerdtree
+"autocmd vimenter * NERDTree
+"map <C-b> :NERDTreeMirror<CR>
+"map <C-b> :NERDTreeToggle<CR>
+
+
+"UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-v>"
+let g:UltiSnipsJumpBackwardTrigger="<c-c>"
+let g:snips_author="Duino"
+let g:snips_email="472365351duino@gmail.com"
+let g:snips_github="github.com/duinodu"
+let g:ultisnips_python_style="google"
