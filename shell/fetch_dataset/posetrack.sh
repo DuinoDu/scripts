@@ -1,10 +1,10 @@
 #!/bin/bash
 
 
-if [ ! -d ~/data/posetrack ];then
-    mkdir ~/data/posetrack
+if [ ! -d ~/data/humanpose/posetrack ];then
+    mkdir ~/data/humanpose/posetrack
 fi
-cd ~/data/posetrack
+cd ~/data/humanpose/posetrack
 
 if [ ! -d tar ];then
     mkdir tar
