@@ -6,6 +6,11 @@ if [ ! -d ~/data/posetrack ];then
 fi
 cd ~/data/posetrack
 
+if [ ! -d tar ];then
+    mkdir tar
+fi
+cd tar
+
 image0='https://datasets.d2.mpi-inf.mpg.de/posetrack/posetrack_data_images.tar.batch00'
 image1='https://datasets.d2.mpi-inf.mpg.de/posetrack/posetrack_data_images.tar.batch01'
 image2='https://datasets.d2.mpi-inf.mpg.de/posetrack/posetrack_data_images.tar.batch02'
