@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ ! -n "$1" ];then
+    echo "Usage: runlatex xxx.tex."
+    exit 1
+fi
+
+texname=$1
+texname=${texname%.*}
+
+xelatex $texname.tex
+bibtex $texname.aux
+xelatex $texname.tex
+evince $texname.pdf
