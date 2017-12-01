@@ -3,7 +3,7 @@
 ```
 python 1_find_papers.py --pdf [xxx.pdf]
 ```
-Search references in xxx.pdf and filter record using **keywords** specified in [1_find_paper.py](). Results are saved in _papers.json_
+Search references in xxx.pdf and filter record using **keywords** specified in [1_find_paper.py](https://github.com/DuinoDu/scripts/blob/master/python/papers/1_find_papers.py#L11). Results are saved in _papers.json_
 
 
 ```
