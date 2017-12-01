@@ -9,7 +9,7 @@ Search references in xxx.pdf and filter record using **keywords** specified in [
 ```
 2_fetch_papers.py
 ```
-Fetch paper's download url using selenium and BING. Refer [here] to install selenium and webdriver. Results are saved in _papers.json_
+Fetch paper's download url using selenium and [BING](https://cn.bing.com). Refer [install_selenium.sh](https://github.com/DuinoDu/scripts/blob/master/shell/install/install_selenium.sh) to install selenium and webdriver. Results are saved in _papers.json_
 
 
 ```
