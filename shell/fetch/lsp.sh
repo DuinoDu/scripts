@@ -1,13 +1,13 @@
 #!/bin/bash
 
-lsp1='http://192.168.73.132/sam.johnson.io/research/lsp_dataset_original.zip'
-lsp2='http://192.168.73.130/sam.johnson.io/research/lspet_dataset.zip'
+lsp1='http://sam.johnson.io/research/lsp_dataset_original.zip'
+lsp2='http://sam.johnson.io/research/lspet_dataset.zip'
 
-if [ ! -d ~/data/humanpose/lsp/zip ];then
-    mkdir -p ~/data/humanpose/lsp/zip
+if [ ! -d ~/data/lsp/zip ];then
+    mkdir -p ~/data/lsp/zip
 fi
 
-cd ~/data/humanpose/lsp
+cd ~/data/lsp
 
 if [ ! -d lsp ];then
     mkdir lsp
@@ -28,4 +28,4 @@ unzip ../zip/lsp_dataset_original.zip
 cd ../lspet
 unzip ../zip/lspet_dataset.zip
 
-echo "LSP is in ~/data/humanpose/lsp"
+echo "LSP is in ~/data/lsp"
