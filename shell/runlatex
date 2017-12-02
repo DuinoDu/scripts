@@ -10,7 +10,7 @@ texname=$1
 texname=${texname%.*}
 xelatex $texname.tex
 
-if [ ! -n "$2" ];then
+if [ -n "$2" ];then
     echo "Using bibtex."
     bibtex $texname.aux
     xelatex $texname.tex
