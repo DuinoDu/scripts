@@ -5,10 +5,15 @@ if [ ! -n "$1" ];then
     exit 1
 fi
 
+
 texname=$1
 texname=${texname%.*}
+xelatex $texname.tex
 
-xelatex $texname.tex
-bibtex $texname.aux
-xelatex $texname.tex
+if [ ! -n "$2" ];then
+    echo "Using bibtex."
+    bibtex $texname.aux
+    xelatex $texname.tex
+fi
+
 evince $texname.pdf
