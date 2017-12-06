@@ -21,7 +21,6 @@ ln -s ~/data/coco coco
 cd $root
 python download_and_convert_data.py
 
-
 # fetch pretrained model
 if [ ! -d data/pretrained_models ];then
     mkdir -p data/pretrained_models
