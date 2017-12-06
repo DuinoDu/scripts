@@ -11,7 +11,6 @@ cd $root
 # check tensorflow version
 ##########################
 tf_version=`python -c "import tensorflow as tf; print(tf.__version__.replace('.', ''))"`
-tf_version='110'
 if [ ! "$tf_version" -ge "120" ]; then
     echo "tensorflow should >= v1.2.0"
     read -p "if update tensorflow?[y/n]" update
