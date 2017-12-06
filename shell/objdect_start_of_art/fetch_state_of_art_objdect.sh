@@ -59,3 +59,6 @@ fetch ${folders[4]} "${code[*]}"
 
 code=($DSOD_caffe)
 fetch ${folders[5]} "${code[*]}"
+
+cd a_SSD/caffe
+git checkout origin/ssd
