@@ -17,8 +17,9 @@ RFCN_deformable_mx="https://github.com/msracver/Deformable-ConvNets"
 FPN_tf="https://github.com/xmyqsh/FPN"
 
 maskRCNN_pytorch="https://github.com/felixgwu/mask_rcnn_pytorch"
-maskRCNN_tf="https://github.com/CharlesShang/FastMaskRCNN"
 maskRCNN_mx="https://github.com/TuSimple/mx-maskrcnn"
+maskRCNN_tf1="https://github.com/CharlesShang/FastMaskRCNN"
+maskRCNN_tf2="https://github.com/matterport/Mask_RCNN"
 
 SSD_caffe="https://github.com/weiliu89/caffe.git"
 SSD_pytorch="https//github.com/duinodu/ssd.startup"
@@ -51,7 +52,7 @@ fetch ${folders[1]} "${code[*]}"
 code=($FPN_tf)
 fetch ${folders[2]} "${code[*]}"
 
-code=($maskRCNN_pytorch $maskRCNN_tf $maskRCNN_mx)
+code=($maskRCNN_pytorch $maskRCNN_tf1 $maskRCNN_tf2 $maskRCNN_mx)
 fetch ${folders[3]} "${code[*]}"
 
 code=($SSD_caffe $SSD_pytorch)
