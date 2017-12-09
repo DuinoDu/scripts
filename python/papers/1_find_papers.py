@@ -8,9 +8,9 @@ import commands
 import re
 import json
 
-keywords = ['pose', 'estimation', 'human', 'keypoint']
+keywords = ['context']
 
-not_keywords = ['3d']
+not_keywords = ['speech', 'sentense']
 
 class Article(object):
 
@@ -157,32 +157,40 @@ def get_reference(txt_file, args):
     return refers
 
 def main(args):
-    pdf_file = args.pdf
-    txt_file = "pdf_out.txt"
-    if os.path.exists(txt_file) and not args.saving_cache:
-        os.remove(txt_file)
+    if args.pdf_dir != '':
+        pdfs = sorted([os.path.join(args.pdf_dir, x) for x in sorted(os.listdir(args.pdf_dir)) if x.endswith('.pdf')])
+    elif args.pdf != '':
+        pdfs = [args.pdf]
+    else:
+        print('No input pdfs')
+        return
 
-    # parse pdf to txt
-    parse_pdf(pdf_file, txt_file)
+    for pdf_file in pdfs:
+        txt_file = "pdf_out.txt"
+        if os.path.exists(txt_file) and not args.saving_cache:
+            os.remove(txt_file)
 
-    # get references from txt 
-    refers = get_reference(txt_file, args)
+        # parse pdf to txt
+        parse_pdf(pdf_file, txt_file)
 
-    year_title_list = []
-    for r in refers:
-        print(r.title)
-        year_title_list.append({"year":r.year, "title":r.title, "refered":r.referedby})
+        # get references from txt 
+        refers = get_reference(txt_file, args)
 
-    papers = []
-    if os.path.exists(args.json_file):
-        with open(args.json_file, 'r') as fid:
-            papers = json.load(fid)
+        year_title_list = []
+        for r in refers:
+            print(r.title)
+            year_title_list.append({"year":r.year, "title":r.title, "refered":r.referedby})
 
-    papers += year_title_list
-    papers = sorted(papers, key=lambda l : l["year"])
+        papers = []
+        if os.path.exists(args.json_file):
+            with open(args.json_file, 'r') as fid:
+                papers = json.load(fid)
 
-    with open(args.json_file, 'w') as fid:
-        json.dump(papers, fid)
+        papers += year_title_list
+        papers = sorted(papers, key=lambda l : l["year"])
+
+        with open(args.json_file, 'w') as fid:
+            json.dump(papers, fid)
 
     if not args.saving_cache:
         os.remove(txt_file)
@@ -193,6 +201,7 @@ def str2bool(s):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Search papers related to one topic according to Reference')
     parser.add_argument('--pdf', default='', type=str, help='input pdf')
+    parser.add_argument('--pdf_dir', default='', type=str, help='input pdf folder')
     parser.add_argument('--json_file', default='papers.json', type=str, help='all papers titles stored in json')
     parser.add_argument('--saving_cache', default='n', type=str2bool, help='if saving cache')
     args = parser.parse_args()

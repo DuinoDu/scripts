@@ -28,3 +28,8 @@ Refine paper pdf filename using PDFMiner to parse pdf and get title.
 5_fetch_bib.py
 ```
 Fetch bibliography using selenium and [scirate](https://scirate.com). Only support arxiv papers now.
+
+```
+6_fetch_cite_from_tex.sh
+```
+Get cited reference in input tex file and saved in paper folder
