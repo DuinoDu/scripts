@@ -28,7 +28,7 @@ def get_bib(url):
     bibs = b.find_elements_by_class_name('bibtex')
     for bibarea in bibs:
         bibarea.click()
-        bib = str(bibarea.text)
+        bib = str(bibarea.text.encode('utf-8'))
         if len(bib) > 0:
             return bib
     return ""
@@ -36,16 +36,17 @@ def get_bib(url):
 
 def fetch_url(args):
 
-    is_arxivID = lambda x : re.search('^[0-9]{4}\.[0-9]+', x) is not None
-    arxiv_pdfs = [x for x in os.listdir(args.input_dir) if is_arxivID(x)]
+    arxivID = lambda x : re.search('^[0-9]{4}\.[0-9]+', x)
+    arxiv_pdfs = [x for x in os.listdir(args.input_dir) if arxivID(x) is not None]
 
     t = tqdm.tqdm()
     t.total = len(arxiv_pdfs)
-            
+    
     bibs = []
     for p in arxiv_pdfs:
         t.update()
-        bib = get_bib(url + p[:-4])
+        id = arxivID(p).group(0)
+        bib = get_bib(url + id)
         bibs.append(bib)
         
     with open(args.output_file, 'w') as fid:
