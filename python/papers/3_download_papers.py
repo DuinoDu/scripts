@@ -42,10 +42,10 @@ def download(args):
     t.total = len(papers)
     for cnt, p in enumerate(papers):
         t.update()
+        print('downloading ', p['url'], '...')
         if len(str(p['url'])) == 0:
             lost.append(p['title'])
             continue
-        
         try:
             p['title'] = str(p['title']).replace(' ', '_')
         except Exception as e:
@@ -54,7 +54,6 @@ def download(args):
 
         # download
         year = p['year']
-        print('downloading...')
 
         dst = "{}/{}_{}.pdf".format(save_path, p['year'], p['title'])
         cmd = 'wget -O {} {}'.format(dst, p['url'])
@@ -68,7 +67,7 @@ def download(args):
 
     with open('lost_papers.txt', 'w') as fid:
         for l in lost:
-            fid.write(l + '\n')
+            fid.write(l.encode('utf-8') + '\n')
     print('You need to download papers manually in lost_paper.txt')
     
 
