@@ -1,4 +1,8 @@
 #!/bin/bash
-git add . --ignore-removal
-git commit -m "$1"
+msg='update'
+if [ -n "$1" ];then
+    msg=$1
+fi
+git add . 
+git commit -m "$msg"
 git push
