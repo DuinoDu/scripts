@@ -12,8 +12,15 @@ cd $root
 # build lib
 ####################
 ARCH=sm_61
+CUDA_ROOT=/usr/local/cuda
+if [ ! -d $CUDA_ROOT ];then
+    if [ ! -L $CUDA_ROOT ];then
+        echo "Not found cuda."
+        exit
+    fi
+fi
 function nvcc_build() {
-    nvcc -std=c++11 -c -o $1.o $1 -x cu -Xcompiler -fPIC -arch=$ARCH
+    $CUDA_ROOT/bin/nvcc -std=c++11 -c -o $1.o $1 -x cu -Xcompiler -fPIC -arch=$ARCH
 }
 cd lib/nms/src/cuda
 nvcc_build nms_kernel.cu

@@ -36,6 +36,9 @@ VOCroot=~/data/VOCdevkit
 if [ ! -d data/VOCdevkit2007 ];then
     ln -s $VOCroot data/VOCdevkit2007
 fi
+if [ ! -d data/VOCdevkit2012 ];then
+    ln -s $VOCroot data/VOCdevkit2012
+fi
 
 
 ######################

@@ -7,7 +7,7 @@ cd ~/project/objdect
 
 folders=('0_fRCNN' '1_RFCN' '2_FPN' '3_maskRCNN' 'a_SSD' 'b_DSOD')
 
-fRCNN_pytorch1="https://github.com/longcw/faster_rcnn_pytorch"
+fRCNN_pytorch1="https://github.com/ruotianluo/faster_rcnn_pytorch"
 fRCNN_tf1="https://github.com/endernewton/tf-faster-rcnn"
 fRCNN_mx=""
 
