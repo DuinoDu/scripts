@@ -1,0 +1,16 @@
+\documentclass{article}
+
+\usepackage{geometry}
+\usepackage[tight-spacing=true]{siunitx}
+
+\newgeometry{left=0.5cm}
+\begin{document}\footnotesize\setlength{\tabcolsep}{0.2em}{\centering\arraybackslash}
+\begin{tabular}{c|c|c|c|c*{20}{c}{r}}
+method & backbone & mAP & aero & bike & bird & boat & bottle & bus  & car  & cat & chair & cow & table & dog  & horse & mbike & person & plate & sheep & sofa & train & tv \\
+\hline
+\hline
+Faster RCNN & vgg16 & 71.3 & 69.1  & 79.8 & 68.0 & 59.0 & 55.9 & 78.0 & 82.3 & 84.1 & 51.5 & 77.8 & 68.1 & 79.5 & 83.6 & 76.0 & 78.1 & 46.8 & 71.9 & 66.8  & 76.2 & 73.2 \\
+%method & backbone & map aps \\
+
+\end{tabular}
+\end{document}
