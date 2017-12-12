@@ -5,7 +5,7 @@ if [ ! -d ~/project/objdect ];then
 fi
 cd ~/project/objdect
 
-folders=('0_fRCNN' '1_RFCN' '2_FPN' '3_maskRCNN' 'a_SSD' 'b_DSOD')
+folders=('0_fRCNN' '1_RFCN' '2_FPN' '3_maskRCNN' 'a_SSD' 'b_DSOD' 'c_RetinaNet')
 
 fRCNN_pytorch1="https://github.com/ruotianluo/faster_rcnn_pytorch"
 fRCNN_tf1="https://github.com/endernewton/tf-faster-rcnn"
@@ -25,6 +25,8 @@ SSD_caffe="https://github.com/weiliu89/caffe.git"
 SSD_pytorch="https//github.com/duinodu/ssd.startup"
 
 DSOD_caffe="https://github.com/szq0214/DSOD"
+
+RetinaNet_pytorch="https://github.com/c0nn3r/RetinaNet"
 
 function fetch() {
     if [ ! -d $1 ];then
@@ -60,6 +62,9 @@ fetch ${folders[4]} "${code[*]}"
 
 code=($DSOD_caffe)
 fetch ${folders[5]} "${code[*]}"
+
+code=($RetinaNet_pytorch)
+fetch ${folders[6]} "${code[*]}"
 
 cd a_SSD/caffe
 git checkout origin/ssd
