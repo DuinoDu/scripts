@@ -7,11 +7,17 @@ cd ~/project/gan
 
 srez="https://github.com/david-gpu/srez"
 pr_sr="https://github.com/leehomyc/Photo-Realistic-Super-Resoluton"
-bicycle_gan="https://github.com/junyanz/BicycleGAN"
+BicycleGAN="https://github.com/junyanz/BicycleGAN"
 pix2pixHD="https://github.com/NVIDIA/pix2pixHD"
-prog_gans="https://github.com/ptrblck/prog_gans_pytorch_inference"
+prog_gans_pytorch_inference="https://github.com/ptrblck/prog_gans_pytorch_inference"
+progressive_growing_of_gans="https://github.com/tkarras/progressive_growing_of_gans"
 
-code=($srez $pr_sr $bicycle_gan $pix2pixHD $prog_gans)
+code=($srez \
+    $pr_sr \
+    $BicycleGAN \
+    $pix2pixHD \
+    $prog_gans_pytorch_inference \
+    $progressive_growing_of_gans)
 
 function fetch() {
     codes=$1
