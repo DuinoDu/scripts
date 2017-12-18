@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "start-paper-coding [paper name]"
+    exit 1
+fi
+
+if [ ! -d $1 ];then
+    mkdir $1
+fi
+cd $1
+
+mkdir data 
+mkdir test 
+mkdir dataset
+mkdir -p experiments/logs 
+mkdir -p experiments/scripts 
+
+touch augmentation.py
+touch models.py 
+touch train.py 
+touch predict.py 
