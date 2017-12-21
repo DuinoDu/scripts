@@ -41,8 +41,17 @@ for each in ${a[*]} ; do
     echo "" >> $filename
 done
 
+# add test_function
+a=($(grep '^def ' $1 | cut -d ' ' -f 2 | cut -d '(' -f 1))
+for each in ${a[*]} ; do
+    echo "def test_${each}():" >> $filename 
+    echo '    pass' >> $filename
+    echo "" >> $filename
+done
+
 echo "" >> $filename
 echo 'if __name__ == "__main__":' >> $filename
 for each in ${a[*]} ; do
     echo "    test_${each}()" >> $filename   
 done
+chmod +x $filename
