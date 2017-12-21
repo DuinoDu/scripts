@@ -17,6 +17,10 @@ fi
 
 touch $filename
 
+echo "#!/usr/bin/env python" >> $filename
+echo "# -*- coding: utf-8 -*-" >> $filename
+
+
 # add import libs
 OLDIFS=$IFS
 IFS="
@@ -54,4 +58,5 @@ echo 'if __name__ == "__main__":' >> $filename
 for each in ${a[*]} ; do
     echo "    test_${each}()" >> $filename   
 done
+
 chmod +x $filename
