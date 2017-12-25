@@ -14,14 +14,12 @@ if [ -f $filename ];then
     echo "$filename exist."
     exit 1
 fi
-
 touch $filename
 
-echo "#!/usr/bin/env python" >> $filename
+###################
+# add import libs #
+###################
 echo "# -*- coding: utf-8 -*-" >> $filename
-
-
-# add import libs
 OLDIFS=$IFS
 IFS="
 "
@@ -30,33 +28,32 @@ for each in ${import_items[*]} ; do
     echo $each >> $filename 
 done
 IFS=$OLDIFS 
-
+echo "import unittest" >> $filename
 echo "import sys, os" >> $filename
 echo "sys.path.append(os.path.join(os.path.dirname(__file__), '..'))" >> $filename
 
 echo "from ${1%.py} import *" >> $filename
 echo "" >> $filename
 
+
+
+################
+# add TestCase #
+################
+echo "class Tester(unittest.TestCase):" >> $filename
+echo "" >> $filename
+
 # add test_class
-a=($(grep 'class ' $1 | cut -d ' ' -f 2 | cut -d '(' -f 1))
-for each in ${a[*]} ; do
-    echo "def test_${each}():" >> $filename 
-    echo '    pass' >> $filename
+class=($(grep 'class ' $1 | cut -d ' ' -f 2 | cut -d '(' -f 1))
+func=($(grep '^def ' $1 | cut -d ' ' -f 2 | cut -d '(' -f 1))
+items=(${class[@]} ${func[@]})
+for each in ${items[*]} ; do
+    echo "    def test_${each}(self):" >> $filename 
+    echo '        pass' >> $filename
     echo "" >> $filename
 done
 
-# add test_function
-a=($(grep '^def ' $1 | cut -d ' ' -f 2 | cut -d '(' -f 1))
-for each in ${a[*]} ; do
-    echo "def test_${each}():" >> $filename 
-    echo '    pass' >> $filename
-    echo "" >> $filename
-done
 
 echo "" >> $filename
 echo 'if __name__ == "__main__":' >> $filename
-for each in ${a[*]} ; do
-    echo "    test_${each}()" >> $filename   
-done
-
-chmod +x $filename
+echo "    unittest.main()" >> $filename
