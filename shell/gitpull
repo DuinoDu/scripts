@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd ~/.vim/UltiSnips
+git pull
+
+cd ~/project/codelib
+git pull
+
+cd ~/project/scripts
+git pull
+
