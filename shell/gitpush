@@ -8,7 +8,7 @@ while (my $line=<f>) {
     $line =~ s/~/$ENV{'HOME'}/;
     print "$line\n";
     chdir($line) or die "can't cd to ".$line;
-    system "git pull";
+    system "gits 'what a nice day'";
     print "\n";
 }
 close f;
