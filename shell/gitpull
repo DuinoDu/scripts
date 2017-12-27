@@ -1,11 +1,14 @@
-#!/bin/bash
+#!/usr/bin/env perl
 
-cd ~/.vim/UltiSnips
-git pull
+use strict;
 
-cd ~/project/codelib
-git pull
-
-cd ~/project/scripts
-git pull
-
+open f, $ENV{'HOME'}."/.gitpullrc" or die "~/.gitpullrc not found";
+while (my $line=<f>) {
+    chomp $line;
+    $line =~ s/~/$ENV{'HOME'}/;
+    print "$line\n";
+    chdir($line) or die "can't cd to ".$line;
+    system "git pull";
+    print "\n";
+}
+close f;
