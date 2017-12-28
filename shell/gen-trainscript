@@ -1,0 +1,62 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "./gen_trainscript [input python file]"
+    exit 1
+fi
+
+if [ ! -d experiments/scripts ];then
+    mkdir -p experiments/scripts
+fi
+
+if [ ! -d experiments/logs ];then
+    mkdir -p experiments/logs
+fi
+
+filename="experiments/scripts/train.sh"
+if [ -f $filename ];then
+    echo "experiments/scripts/train.sh exists."
+    exit 1
+fi
+touch $filename
+function write() {
+    echo $1 >> $filename
+}
+
+############
+# add head #
+############
+write "#!/bin/bash"
+write ""
+write "set -x"
+write "set -e"
+write "export PYTHONBUFFERED=\"True\""
+write ""
+
+###########
+# add log #
+###########
+write "LOG=\"experiments/logs/training_log.txt.\`date +\'%Y-%m-%d_%H-%M-%S\'\`\""
+write "&> >(tee -a \"\$LOG\")"
+write "Logging output to \"\$LOG\""
+write ""
+write ""
+write ""
+
+
+#############
+# add train #
+#############
+
+write "time python train.py \\"
+OLDIFS=$IFS
+IFS="
+"
+args=($(grep 'add_argument' $1))
+for each in ${args[*]};do
+    argname=`echo $each | cut -d ' ' -f 1 | cut -d '(' -f 2 | sed "s/'//g" | sed 's/,//g'`
+    default=`echo $each | cut -d ' ' -f 2 | cut -d '=' -f 2 | cut -d ',' -f 1`
+    #echo ${argname}  $default
+    write "    $argname $default \\"
+done
+IFS=$OLDIFS
