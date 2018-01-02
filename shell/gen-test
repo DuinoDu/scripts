@@ -9,37 +9,47 @@ if [ ! -d test ];then
     mkdir test
 fi
 
+NEW=1
 filename="test/test_${1}"
 if [ -f $filename ];then
-    echo "$filename exist."
-    exit 1
+    echo "$filename exist"
+    echo "adding mode"
+    NEW=0
 fi
 touch $filename
 
 ###################
 # add import libs #
 ###################
-echo "# -*- coding: utf-8 -*-" >> $filename
-OLDIFS=$IFS
-IFS="
-"
-import_items=($(grep 'import' $1))
-for each in ${import_items[*]} ; do
-    echo $each >> $filename 
-done
-IFS=$OLDIFS 
-echo "import unittest" >> $filename
-echo "import sys, os" >> $filename
-echo "sys.path.append(os.path.join(os.path.dirname(__file__), '..'))" >> $filename
-
-echo "from ${1%.py} import *" >> $filename
-echo "" >> $filename
+if test $NEW -eq 1;then
+    echo "# -*- coding: utf-8 -*-" >> $filename
+    OLDIFS=$IFS
+    IFS="
+    "
+    import_items=($(grep 'import' $1))
+    for each in ${import_items[*]} ; do
+        echo $each >> $filename 
+    done
+    IFS=$OLDIFS 
+    echo "import unittest" >> $filename
+    echo "import sys, os" >> $filename
+    echo "sys.path.append(os.path.join(os.path.dirname(__file__), '..'))" >> $filename
+    
+    echo "from ${1%.py} import *" >> $filename
+    echo "" >> $filename
+fi
 
 
 
 ################
 # add TestCase #
 ################
+oldtest=
+if test $NEW -eq 0;then
+    oldtest=($(grep '    def test_' $filename | cut -d ' ' -f 6 | cut -d '(' -f 1))
+fi
+# Not used yet !!
+
 echo "class Tester(unittest.TestCase):" >> $filename
 echo "" >> $filename
 

@@ -38,7 +38,7 @@ write ""
 ###########
 write "LOG=\"experiments/logs/training_log.txt.\`date +\'%Y-%m-%d_%H-%M-%S\'\`\""
 write "&> >(tee -a \"\$LOG\")"
-write "Logging output to \"\$LOG\""
+write "echo Logging output to \"\$LOG\""
 write ""
 write ""
 write ""
