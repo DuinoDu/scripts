@@ -23,6 +23,9 @@ cd TT100K
 wget $data
 wget $code
 
+unzip data.zip
+unzip code.zip
+
 
 #wget $data1
 #wget $data2
