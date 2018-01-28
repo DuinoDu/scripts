@@ -4,6 +4,7 @@
 '''
 python checkgt.py jpeg_path [xml path]
 '''
+from __future__ import division
 import os, sys
 import os.path as osp
 import cv2
@@ -36,8 +37,14 @@ def checkgt(argv):
     
     boxes = loadXML(xmlfile)
     img = cv2.imread(imgfile)
+
+    factor = 1
+    if img.shape[0] > 1000:
+        factor = img.shape[0] / 1000
+    img = cv2.resize(img, (int(img.shape[1]/factor), int(img.shape[0]/factor)))
     for box in boxes:
-        img = cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]), (0, 255, 255))
+        box = [int(x/factor) for x in box]
+        img = cv2.rectangle(img, (box[0], box[1]), (box[2], box[3]), (0, 255, 255), 2)
 
     cv2.imshow('checkgt', img)
     cv2.waitKey(0)

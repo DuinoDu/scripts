@@ -5,12 +5,8 @@ if [ ! -n "$1" ];then
     exit 1
 fi
 
-if [ ! -d test ];then
-    mkdir test
-fi
-
 NEW=1
-filename="test/test_${1}"
+filename="test_${1}"
 if [ -f $filename ];then
     echo "$filename exist"
     echo "adding mode"
@@ -18,24 +14,24 @@ if [ -f $filename ];then
 fi
 touch $filename
 
+
 ###################
 # add import libs #
 ###################
 if test $NEW -eq 1;then
     echo "# -*- coding: utf-8 -*-" >> $filename
     OLDIFS=$IFS
-    IFS="
-    "
+    IFS=""
     import_items=($(grep 'import' $1))
     for each in ${import_items[*]} ; do
         echo $each >> $filename 
     done
     IFS=$OLDIFS 
+
     echo "import unittest" >> $filename
     echo "import sys, os" >> $filename
-    echo "sys.path.append(os.path.join(os.path.dirname(__file__), '..'))" >> $filename
-    
     echo "from ${1%.py} import *" >> $filename
+    echo "sys.path.append(os.path.join(os.path.dirname(__file__), '..'))" >> $filename
     echo "" >> $filename
 fi
 
@@ -60,6 +56,7 @@ items=(${class[@]} ${func[@]})
 for each in ${items[*]} ; do
     echo "    def test_${each}(self):" >> $filename 
     echo '        pass' >> $filename
+    echo "" >> $filename
     echo "" >> $filename
 done
 
