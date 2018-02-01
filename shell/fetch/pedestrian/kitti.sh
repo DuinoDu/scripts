@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd ~
-dir='data/pedestrain/kitti'
+dir='data/pedestrian/kitti'
 if [ ! -d $dir ];then
     mkdir -p $dir
 fi

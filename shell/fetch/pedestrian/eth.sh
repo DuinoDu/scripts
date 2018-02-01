@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd~
+cd ~
 dir='data/pedestrian/eth'
 if [ ! -d $dir ];then
     mkdir -p $dir
