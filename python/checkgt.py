@@ -18,10 +18,10 @@ def loadXML(xmlfile):
     for ix, obj in enumerate(objs):
         bbox = obj.find('bndbox')
         # Make pixel indexes 0-based
-        x1 = int(bbox.find('xmin').text) - 1
-        y1 = int(bbox.find('ymin').text) - 1
-        x2 = int(bbox.find('xmax').text) - 1
-        y2 = int(bbox.find('ymax').text) - 1
+        x1 = int(float(bbox.find('xmin').text)) - 1
+        y1 = int(float(bbox.find('ymin').text)) - 1
+        x2 = int(float(bbox.find('xmax').text)) - 1
+        y2 = int(float(bbox.find('ymax').text)) - 1
         boxes.append([x1, y1, x2, y2])
     return boxes
 

@@ -3,10 +3,11 @@
 #https://github.com/mitmul/caltech-pedestrian-dataset-converter/blob/master/shells/download.sh
 
 cd ~/
-if [ ! -d data/pedestrian/caltech ];then
-    mkdir -p data/pedestrian/caltech
+dir=data/pedestrian/Caltech
+if [ ! -d $dir ];then
+    mkdir -p $dir
 fi
-cd data/pedestrian/caltech
+cd $dir
 
 wget http://www.vision.caltech.edu/Image_Datasets/CaltechPedestrians/datasets/USA/annotations.zip
 wget http://www.vision.caltech.edu/Image_Datasets/CaltechPedestrians/datasets/USA/set00.tar
