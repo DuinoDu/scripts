@@ -12,10 +12,12 @@ fi
 cd .runreact
 rm .git -rf
 
-if [ ! -d ../node_modules ];then
-    cnpm install
-elif [ ! -d node_modules ]; then
-    ln -s ../node_modules node_modules
+if [[ ! -L node_modules && ! -d node_modules ]];then
+    if [[ -d ../node_modules ]];then
+        ln -s ../node_modules node_modules
+    else
+        cnpm install
+    fi
 fi
 
 if [ -d dist ];then
