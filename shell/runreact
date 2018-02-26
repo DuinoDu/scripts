@@ -5,6 +5,9 @@ if [ ! -n "$1" ];then
     exit 1
 fi
 
+##################
+# create .runreact 
+##################
 if [ ! -d .runreact ];then
     git clone https://github.com/DuinoDu/runreact
     mv runreact .runreact
@@ -20,16 +23,46 @@ if [[ ! -L node_modules && ! -d node_modules ]];then
     fi
 fi
 
-if [ -d dist ];then
-    rm dist -r
-fi
-
+#################################
+# find Component name and replace
+#################################
 cp ../$1 .
 copyfile=`basename $1`
 filename=${copyfile%.*}
 component=`grep '^export' $copyfile | cut -d ' ' -f 3 | cut -d ';' -f 1` 
-sed "s/component/${component}/g" index.js.bak > index.js
-sed -i "s/file/${filename}/g" index.js
+sed "s/component/${component}/g" react_index.js.bak > react_index.js
+sed -i "s/file/${filename}/g" react_index.js
 
-webpack
-firefox index.html
+
+#####################
+# npm install new lib
+#####################
+function exist() {
+    ret=`python -c "
+import json
+pkgs = json.load(open('package.json', 'r'))
+libs = [v.keys() for v in pkgs.values()]
+libs = [str(x) for y in libs for x in y]
+target = \"${1}\"
+if target in libs:
+    print(1)
+else:
+    print(0)
+"`
+    return $ret
+}
+deps=`grep -oP "from.*;$" ../$1 | cut -d "'" -f 2`
+for dep in $deps ; do
+    exist $dep
+    if [[ $? == 0 ]]; then
+        echo "$dep not exist, install..."
+        cnpm install $dep --save-dev
+    fi
+done
+
+
+if [ -d dist ];then
+    rm dist -r
+fi
+webpack --mode development
+hash google-chrome 2>/dev/null && google-chrome index.html || firefox index.html
