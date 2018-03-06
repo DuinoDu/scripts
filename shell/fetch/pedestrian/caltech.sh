@@ -57,3 +57,8 @@ rm -rf set09.tar
 
 tar xvf set10.tar
 rm -rf set10.tar
+
+mkdir annotations_new
+cd annotations_new
+wget http://datasets.d2.mpi-inf.mpg.de/caltech_new_annos/Caltech_new_annotations.zip
+unzip Caltech_new_annotations.zip
