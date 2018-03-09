@@ -8,6 +8,7 @@ cd data/pedestrian/citypersons
 
 wget https://bitbucket.org/shanshanzhang/citypersons/get/c13bbdfa9862.zip
 unzip c13bbdfa9862.zip
+mv shanshanzhang-citypersons* shanshanzhang-citypersons
 
 echo "open"
 echo "https://www.cityscapes-dataset.com/file-handling/?packageID=3"

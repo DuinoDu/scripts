@@ -56,7 +56,6 @@ args=($(grep 'add_argument' $1))
 for each in ${args[*]};do
     argname=`echo $each | cut -d ' ' -f 1 | cut -d '(' -f 2 | sed "s/'//g" | sed 's/,//g'`
     default=`echo $each | cut -d ' ' -f 2 | cut -d '=' -f 2 | cut -d ',' -f 1`
-    #echo ${argname}  $default
     write "    $argname $default \\"
 done
 IFS=$OLDIFS

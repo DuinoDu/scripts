@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "runm xxx.m [with GUI]"
+    exit 1
+fi
+
+if [ ! -n "$2" ];then
+    echo "In terminal mode"
+    matlab -nodisplay -nosplash -nodesktop -r "run ('$1')"
+else
+    echo "In GUI mode"
+    matlab -r "run ('$1')"
+fi
