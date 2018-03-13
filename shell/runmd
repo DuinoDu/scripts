@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "runmd FOLDER[containing md] [gatsby blog path, default:~/project/blog]"
+    exit
+fi
+
+blog_root=~/project/gatsby-blog
+if [ -n "$2" ];then
+    blog_root=$2
+fi
+echo $blog_root
+if [ ! -d $blog_root ];then
+    echo "Gatsby blog not found."
+    exit
+fi
+
+cp -r $1 $blog_root/src/pages
+cd $blog_root
+gatsby develop
