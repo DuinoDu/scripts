@@ -15,6 +15,6 @@ if [ ! -d $blog_root ];then
     exit
 fi
 
-cp -r $1 $blog_root/src/pages
+cp -r "$1" $blog_root/src/pages
 cd $blog_root
 gatsby develop
