@@ -4,8 +4,16 @@
 import sys
 import matplotlib.pyplot as plt
 
-y = [float(x.strip()) for x in sys.stdin.readlines()]
+y = [x.strip().split(' ')[0] for x in sys.stdin.readlines()]
+y_f = []
+for ind, elem in enumerate(y):
+    try:
+        y_f.append(float(elem))
+    except Exception as e:
+        print('Bad value: {}'.format(elem))
+y = y_f
 x = [i for i in range(len(y))]
+
 
 plt.plot(x, y, color='red', label='loss', linewidth='2')
 
