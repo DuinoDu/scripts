@@ -1,4 +1,4 @@
-##!/bin/bash
+#!/bin/bash
 # PWD=`pwd`
 #sudo apt-get update -y
 #sudo apt-get install cmake python-dev python-pip -y
@@ -7,8 +7,8 @@
 #sudo git
 #git config --global user.email "472365351duino@gmail.com"
 #git config --global user.name "DuinoDu"
-
-
+#
+#
 ## vim
 #sudo apt-get install vim-gtk -y
 #cd $PWD
@@ -28,27 +28,39 @@
 #virtualenv py2
 #virtualenv -p python3 py3
 #source ~/py2/bin/activate
-#
-## pytorch
+
+
+# python lib
+pip install numpy scipy matplotlib pandas jupyter
+pip install sklearn scikit-image opencv-python 
+
+# DL 
+# cuda9.0
+# NVIDIA driver: http://www.nvidia.com/Download/index.aspx?lang=en-us
+# cuda: https://developer.nvidia.com/cuda-downloads
+# cudnn: https://developer.nvidia.com/rdp/cudnn-download
+pip install mxnet-cu90
+pip install http://download.pytorch.org/whl/cu90/torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl
+pip install tensorflow-gpu
+pip install tensorboard-pytorch tensorflow-tensorboard
+pip install torchvision torchtext 
+
+
+# SLAM
+
+## tmux
+#sudo apt-get install tmux zsh curl
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#chsh -s /bin/zsh
+
+
+
+## pytorch from source
 #cd ~
 #mkdir src && cd src
 #git clone --recursive https://github.com/pytorch/pytorch
 #cd pytorch
-#pip install numpy scipy matplotlib pandas
 #pip install -r requirements.txt
 #python setup.py install
-#
-## pip package
-#pip install torchvision torchtext opencv-python jupyter
-#pip install sklearn scikit-image
-#pip install tensorflow tensorflow-tensorboard
-#pip install tensorboard-pytorch
-#pip install mxnet
-
-# SLAM
-
-# tmux
-sudo apt-get install tmux
-sudo apt-get install zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-chsh -s /bin/zsh
+#echo "export PATH=~/project/scripts/python:\$PATH >> ~/.zshrc"
+#echo "export PATH=~/project/scripts/shell:\$PATH >> ~/.zshrc"
