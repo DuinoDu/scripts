@@ -13,9 +13,9 @@ sudo apt-get install -y --no-install-recommends \
 sudo pip install numpy protobuf
 
 # 14.04
-sudo apt-get install -y --no-install-recommends libgflags2
+#sudo apt-get install -y --no-install-recommends libgflags2
 # 16.04
-#sudo apt-get install -y --no-install-recommends libgflags-dev
+sudo apt-get install -y --no-install-recommends libgflags-dev
 
 sudo apt-get install -y --no-install-recommends \
       libgtest-dev \
