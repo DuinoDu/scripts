@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+'''
+cat log.txt | grep loss | cut -d ' ' -f 5 | cut -d ':' -f 1 | plotline.py
+'''
+
+
 import sys
 import matplotlib.pyplot as plt
 
