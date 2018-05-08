@@ -7,6 +7,7 @@ import os
 import commands
 import re
 import json
+import tqdm
 
 keywords = ['context']
 
@@ -92,11 +93,11 @@ def contains_keywords(s):
     s = s.lower()
     flag = False
     for k1 in keywords:
-        if k1 in s and 'http' not in s:
+        if k1 in s and 'http' not in s and k1 is not '':
             flag = True
             break
     for k2 in not_keywords:
-        if k2 in s:
+        if k2 in s and k2 is not '':
             flag = False
             break
     return flag
@@ -164,9 +165,13 @@ def main(args):
     else:
         print('No input pdfs')
         return
+    
+    t = tqdm.tqdm()
+    t.total = len(pdfs)
+    txt_file = "pdf_out.txt"
 
     for pdf_file in pdfs:
-        txt_file = "pdf_out.txt"
+        t.update()
         if os.path.exists(txt_file) and not args.saving_cache:
             os.remove(txt_file)
 
@@ -204,5 +209,11 @@ if __name__ == "__main__":
     parser.add_argument('--pdf_dir', default='', type=str, help='input pdf folder')
     parser.add_argument('--json_file', default='papers.json', type=str, help='all papers titles stored in json')
     parser.add_argument('--saving_cache', default='n', type=str2bool, help='if saving cache')
+    parser.add_argument('--keywords', default='segmentation', type=str, help='keywords')
+    parser.add_argument('--skip_keywords', default='', type=str, help='skip keywords')
     args = parser.parse_args()
+
+    keywords = args.keywords.split(',') 
+    not_keywords = args.skip_keywords.split(',') 
+
     main(args)

@@ -7,8 +7,9 @@ import json
 import os
 import time
 import sys
-reload(sys)
-sys.setdefaultencoding('utf-8')
+if sys.version_info[0] == 2:
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
 import tqdm
 
 from selenium import webdriver
