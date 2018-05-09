@@ -1,5 +1,5 @@
 #!/bin/bash
-# PWD=`pwd`
+PWD=`pwd`
 #sudo apt-get update -y
 #sudo apt-get install cmake python-dev python-pip -y
 #
@@ -11,14 +11,14 @@
 #
 ## vim
 #sudo apt-get install vim-gtk -y
-#cd $PWD
-#cp envrc/vimrc ~/.vimrc
-#mkdir -p ~/.vim/bundle
-#cd ~/.vim/bundle
-#git clone https://github.com/gmarik/Vundle.vim.git
-#cd ~/.vim
-#git clone https://github.com/duinodu/UltiSnips
-#vim -c 'PluginInstall' 
+cd $PWD
+cp envrc/vimrc ~/.vimrc
+mkdir -p ~/.vim/bundle
+cd ~/.vim/bundle
+git clone https://github.com/gmarik/Vundle.vim.git
+cd ~/.vim
+git clone https://github.com/duinodu/UltiSnips
+vim -c 'PluginInstall' 
 
 
 ## python-env
@@ -31,19 +31,20 @@
 
 
 # python lib
-pip install numpy scipy matplotlib pandas jupyter
-pip install sklearn scikit-image opencv-python 
+sudo pip install numpy 
+#pip install scipy matplotlib pandas jupyter
+#pip install sklearn scikit-image opencv-python 
 
 # DL 
 # cuda9.0
 # NVIDIA driver: http://www.nvidia.com/Download/index.aspx?lang=en-us
 # cuda: https://developer.nvidia.com/cuda-downloads
 # cudnn: https://developer.nvidia.com/rdp/cudnn-download
-pip install mxnet-cu90
-pip install http://download.pytorch.org/whl/cu90/torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl
-pip install tensorflow-gpu
-pip install tensorboard-pytorch tensorflow-tensorboard
-pip install torchvision torchtext 
+#pip install mxnet-cu90
+#pip install http://download.pytorch.org/whl/cu90/torch-0.3.0.post4-cp27-cp27mu-linux_x86_64.whl
+#pip install tensorflow-gpu
+#pip install tensorboard-pytorch tensorflow-tensorboard
+#pip install torchvision torchtext 
 
 
 # SLAM
@@ -52,7 +53,7 @@ pip install torchvision torchtext
 #sudo apt-get install tmux zsh curl
 #sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 #chsh -s /bin/zsh
-
+#
 
 
 ## pytorch from source
