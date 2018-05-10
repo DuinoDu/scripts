@@ -5,21 +5,16 @@ if [ ! -d ~/project ];then
 fi
 cd ~/project
 
-if [ ! -n "$1" ];then
-    git clone https://github.com/pjreddie/darknet
-    cd darknet
-    
-    echo "edit Makefile"
-    echo "GPU=1"
-    echo "CUDNN=1"
-    echo "OPENCV=1"
-    echo "OPENMP=1"
-    echo "DEBUG=0"
-    echo "ARCH= -gencode arch=compute_53,code=[sm_53,sm_53]"
-    exit 1
-fi
-
+git clone https://github.com/pjreddie/darknet
 cd darknet
+sed 's/GPU=0/GPU=1/g' Makefile
+sed 's/CUDNN=0/CUDNN=1/g' Makefile
+sed 's/OPENCV=0/OPENCV=1/g' Makefile
+sed 's/OPENMP=0/OPENMP=1/g' Makefile
+sed 's/DEBUG=1/DEBUG=0/g' Makefile
+
+#echo "ARCH= -gencode arch=compute_53,code=[sm_53,sm_53]"
+
 make -j ${nproc}
 
 wget https://pjreddie.com/media/files/yolov3.weights --no-check-certificate
