@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "check_symbol [symbol name] [*.so dir]"
+    exit 1
+fi
+
+
+if [ ! -n "$2" ];then
+    echo "check_symbol [symbol name] [*.so dir]"
+    exit 1
+fi
+
+
+cd $2
+for i in *.so;do 
+    echo *.so
+    objdump -T *.so | grep $1
+done 

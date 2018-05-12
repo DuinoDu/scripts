@@ -14,19 +14,19 @@ cd ~/src/opencv
 cd opencv
 mkdir release
 cd release
-cmake -D WITH_CUDA=ON -D WITH_IPP=OFF -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=${HOME}/src/opencv/opencv_contrib/modules ..
+cmake -D WITH_CUDA=OFF -D WITH_IPP=OFF -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D OPENCV_EXTRA_MODULES_PATH=${HOME}/src/opencv/opencv_contrib/modules ..
 make -j5
 sudo make install
 
-#cd ~/
-#git clone https://github.com/duinodu/testopencvinstall.git
-#cd testopencvinstall
-#sudo chmod +x auto.sh
-#./auto.sh
-#cd build
-#./DisplayImage ../test.jpg
-#echo ""
-#echo "opencv install successfully"
-#echo ""
-#cd ~
-#rm -rf testopencvinstall
+cd ~/
+git clone https://github.com/duinodu/testopencvinstall.git
+cd testopencvinstall
+sudo chmod +x auto.sh
+./auto.sh
+cd build
+./DisplayImage ../test.jpg
+echo ""
+echo "opencv install successfully"
+echo ""
+cd ~
+rm -rf testopencvinstall
