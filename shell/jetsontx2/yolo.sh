@@ -19,7 +19,6 @@ make -j ${nproc}
 
 wget https://pjreddie.com/media/files/yolov3.weights --no-check-certificate
 wget https://pjreddie.com/media/files/yolov3-tiny.weights --no-check-certificate
-wget https://pjreddie.com/media/files/yolov3-voc.weights --no-check-certificate
 
 #./dartnet detector demo cfg/coco.cfg cfg/yolov3.cfg yolov3.weights
 #./dartnet detector demo cfg/coco.cfg cfg/tiny-yolo.cfg tiny-yolo.weights
