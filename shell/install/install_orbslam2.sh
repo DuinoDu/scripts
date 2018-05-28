@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 # OpenCV >= 2.4.6
 sudo apt-get install libopencv-dev -y
@@ -23,7 +23,7 @@ fi
 cd ~/src/orbslam2
 git clone https://github.com/stevenlovegrove/Pangolin.git
 cd Pangolin
-make build && cd build && cmake .. && makei -j5 && sudo make install
+mkdir build && cd build && cmake .. && make -j5 && sudo make install
 
 # Eigen3
 cd ~/src/orbslam2
