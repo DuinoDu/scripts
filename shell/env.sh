@@ -18,7 +18,7 @@ cd ~/.vim/bundle
 git clone https://github.com/gmarik/Vundle.vim.git
 cd ~/.vim
 git clone https://github.com/duinodu/UltiSnips
-vim -c 'PluginInstall' 
+vim +PluginInstall +qall
 
 
 ## python-env
