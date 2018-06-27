@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash 
 
 if [ ! -n "$1" ];then
     echo "runreact [component.js]"
@@ -19,7 +19,7 @@ if [[ ! -L node_modules && ! -d node_modules ]];then
     if [[ -d ../node_modules ]];then
         ln -s ../node_modules node_modules
     else
-        cnpm install
+        npm install
     fi
 fi
 
@@ -56,7 +56,7 @@ for dep in $deps ; do
     exist $dep
     if [[ $? == 0 ]]; then
         echo "$dep not exist, install..."
-        cnpm install $dep --save-dev
+        npm install $dep --save-dev
     fi
 done
 
