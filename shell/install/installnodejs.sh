@@ -8,4 +8,4 @@ nvm_install_latest_npm
 npm config set registry https://registry.npm.taobao.org
 npm config get registry
 
-echo "source ~/.nvm/nvm.sh" >> .zshrc
+echo "source ~/.nvm/nvm.sh" >> ~/.zshrc
