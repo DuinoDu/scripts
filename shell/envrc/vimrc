@@ -16,19 +16,29 @@ Plugin 'vim-scripts/python_fold'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'epilande/vim-react-snippets'
+
 call vundle#end()
 filetype plugin indent on
 
 :colorscheme elflord
 set number
 set cursorline
-set tabstop=4
-set softtabstop=4
-set expandtab
-set shiftwidth=4
 set smartindent
 set foldenable
 set foldmethod=syntax
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype css setlocal ts=2 sts=2 sw=2
+autocmd Filetype scss setlocal ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype python setlocal ts=4 sts=4 sw=4
 
 "nerdtree
 "autocmd vimenter * NERDTree
@@ -44,3 +54,6 @@ let g:snips_author="Duino"
 let g:snips_email="472365351duino@gmail.com"
 let g:snips_github="github.com/duinodu"
 let g:ultisnips_python_style="google"
+
+"vim-jsx
+let g:jsx_ext_required = 0
