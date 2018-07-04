@@ -30,8 +30,8 @@ vim +PluginInstall +qall
 #source ~/py2/bin/activate
 
 
-# python lib
-sudo pip install numpy 
+## python lib
+#sudo pip install numpy 
 #pip install scipy matplotlib pandas jupyter
 #pip install sklearn scikit-image opencv-python 
 
@@ -49,11 +49,11 @@ sudo pip install numpy
 
 # SLAM
 
-## tmux
+# tmux
 #sudo apt-get install tmux zsh curl
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-#chsh -s /bin/zsh
-#
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+chsh -s /bin/zsh
+
 
 
 ## pytorch from source
