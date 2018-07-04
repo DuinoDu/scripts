@@ -1,0 +1,19 @@
+#!/bin/bash -ex
+
+if [ ! -L ~/hdfs ];then
+    ln -s /opt/hdfs/user/min.du hdfs
+fi
+
+cd ~/
+if [ ! -d ~/py2 ];then
+    virtualenv -p python2 py2
+    source ~/py2/bin/activate
+    pip install numpy
+fi
+
+cp -rf ~/hdfs/code/mxnet-python-xin ~
+cp -rf ~/hdfs/code/smart_iot_multitask ~
+cp ~/hdfs/code/.profile ~
+
+source ~/.profile
+echo "source ~/.profile" >> ~/.bashrc

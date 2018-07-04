@@ -1,0 +1,27 @@
+#!/bin/bash -ex
+
+if [ ! -L ~/hdfs ];then
+    ln -s /opt/hdfs/user/min.du hdfs
+fi
+
+dst=~/hdfs/code/
+if [ ! -d $dst ];then
+    mkdir $dst
+fi
+
+if [ ! -d ~/hdfs/code/mxnet-python-xin ];then
+    cp ~/mxnet-python-xin -rf $dst 
+fi
+
+if [ ! -d ~/hdfs/code/smart_iot_multitask ];then
+    cp ~/smart_iot_multitask -rf $dst
+fi
+
+cd ~/
+if [ ! -d ~/py2 ];then
+    virtualenv -p python2 py2
+    source ~/py2/bin/activate
+    pip install numpy
+fi
+
+cp ~/.profile $dst
