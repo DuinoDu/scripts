@@ -25,3 +25,6 @@ if [ ! -d ~/py2 ];then
 fi
 
 cp ~/.profile $dst
+
+cp ~/.vim -rf $dst
+cp ~/.vimrc $dst

@@ -8,12 +8,13 @@ cd ~/
 if [ ! -d ~/py2 ];then
     virtualenv -p python2 py2
     source ~/py2/bin/activate
-    pip install numpy opencv-python
+    pip install numpy opencv-python enum34 easydict matplotlib ipdb
 fi
 
 cp -rf ~/hdfs/code/mxnet-python-xin ~
 cp -rf ~/hdfs/code/smart_iot_multitask ~
 cp ~/hdfs/code/.profile ~
+tar -zxvf ~/hdfs/code/vim.tar.gz -C ~/
 
 source ~/.profile
 echo "source ~/.profile" >> ~/.bashrc
