@@ -8,7 +8,7 @@ cd ~/
 if [ ! -d ~/py2 ];then
     virtualenv -p python2 py2
     source ~/py2/bin/activate
-    pip install numpy
+    pip install numpy opencv-python
 fi
 
 cp -rf ~/hdfs/code/mxnet-python-xin ~
