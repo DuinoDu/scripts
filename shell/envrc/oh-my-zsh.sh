@@ -1,31 +1,49 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 #sudo apt-get install tmux zsh curl
 
-# install ncurses
-wget ftp://invisible-island.net/ncurses/ncurses.tar.gz
-tar -zxvf ncurses.tar.gz
-cd ncurses
-export CXXFLAGS=' -fPIC'
-export CFLAGS=' -fPIC'
-./configure --prefix=$HOME/.local --enable-shared
-make
-# Deduce environment information and build private terminfo tree
-cd progs
-./capconvert
-cd ..
-
-
-## install zsh from src
-#wget -O zsh.tar.gz https://sourceforge.net/projects/zsh/files/latest/download
-#mkdir zsh && tar -xvzf zsh.tar.gz -C zsh --strip-components 1
-#cd zsh
-#./configure --prefix=$HOME
+## install ncurses
+#ncurses_path=https://ftp.gnu.org/gnu/ncurses/ncurses-6.1.tar.gz
+#wget $ncurses_path 
+#tar -zxvf ncurses-6.1.tar.gz
+#cd ncurses-6.1
+#export CXXFLAGS=' -fPIC'
+#export CFLAGS=' -fPIC'
+#./configure --prefix=$HOME/.local --enable-shared
 #make
 #make install
-#
-#
-## oh-my-zsh
+## Deduce environment information and build private terminfo tree
+#cd progs
+#./capconvert
+#cd ..
+#rm ncurses-6.1* -rf
+
+# config path
+INSTALL_PATH='$HOME/.local'
+export PATH=$INSTALL_PATH/bin:$PATH
+export LD_LIBRARY_PATH=$INSTALL_PATH/lib:$LD_LIBRARY_PATH
+
+export LDFLAGS=-L$INSTALL_PATH/lib
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:$INSTALL_PATH/include/ncurses
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$INSTALL_PATH/include/ncurses
+export CFLAGS=-I$INSTALL_PATH/include/ncurses
+export CPPFLAGS=-I$INSTALL_PATH/include/ncurses
+
+# install zsh from src
+wget -O zsh.tar.gz https://sourceforge.net/projects/zsh/files/latest/download
+mkdir zsh && tar -xvzf zsh.tar.gz -C zsh --strip-components 1
+cd zsh
+autoheader
+autoconf
+date < stamp-h.in
+./configure --prefix=$HOME/.local --enable-shared \
+    --includedir=$INSTALL_PATH/include \
+    CFLAGS=-I$INSTALL_PATH/include/ncurses CXXFLAGS=-I$INSTALL_PATH/include/ncurses
+make
+make install
+
+
+# oh-my-zsh
 #sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-#
-##chsh -s /bin/zsh
+
+#chsh -s /bin/zsh
