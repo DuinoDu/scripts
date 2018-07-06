@@ -15,6 +15,8 @@ cp -rf ~/hdfs/code/mxnet-python-xin ~
 cp -rf ~/hdfs/code/smart_iot_multitask ~
 cp ~/hdfs/code/.profile ~
 tar -zxvf ~/hdfs/code/vim.tar.gz -C ~/
+cp ~/hdfs/code/.vimrc ~
 
-source ~/.profile
 echo "source ~/.profile" >> ~/.bashrc
+
+echo "please source ~/.profile to config environment"
