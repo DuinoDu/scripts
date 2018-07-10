@@ -18,7 +18,7 @@ fi
 
 cd ~/project/web
 
-django-admin.py startproject django_demo
+django-admin.py startproject django_demo .
 cd django_demo
 python manage.py migrate
 ./manage.py runserver

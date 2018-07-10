@@ -1,1 +1,4 @@
-find . | xargs grep $1 -r
+#!/bin/bash
+
+#find . | xargs grep $1 -r
+grep -rnw . -e "$1" --color=always
