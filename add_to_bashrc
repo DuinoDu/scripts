@@ -1,0 +1,10 @@
+conf=$HOME/.bashrc
+if [ -n "$1" ];then
+    conf=$1
+fi
+
+echo "export PATH=\$PATH:\$HOME/project/scripts/shell" >> $conf
+echo "export PATH=\$PATH:\$HOME/project/scripts/python" >> $conf 
+
+echo "source $conf to get started!"
+echo ""
