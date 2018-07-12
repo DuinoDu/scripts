@@ -8,3 +8,12 @@ cd ~/
 wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/$filename
 chmod +x $filename
 ./$filename
+
+export PATH="/home/users/min.du/anaconda2/bin:$PATH" 
+conda update conda
+
+echo "---"
+echo "install caffe2"
+echo ">>> conda install -c caffe2 caffe2-cuda9.0-cudnn7"
+echo "or"
+echo ">>> conda install -c caffe2 caffe2-cuda8.0-cudnn7"
