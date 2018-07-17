@@ -1,8 +1,13 @@
 #!/bin/bash
+# File              : /home/users/min.du/project/scripts/shell/gits
+# Author            : du min <min.du@hobot.cc>
+# Date              : 17.07.2018
+# Last Modified Date: 17.07.2018
+# Last Modified By  : du min <min.du@hobot.cc>
 msg='update'
 if [ -n "$1" ];then
     msg=$1
 fi
-git add . 
+git add . -A
 git commit -m "$msg"
 git push
