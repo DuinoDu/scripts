@@ -1,7 +1,7 @@
 #!/bin/bash
 
-old_hdfs=hdfs://hobot-bigdata/user/`whoami`
-new_hdfs=hdfs://hobot-bigdata-aliyun/user/`whoami`
+old_hdfs=hdfs://hobot-bigdata/user
+new_hdfs=hdfs://hobot-bigdata-aliyun/user
 
 path=.
 if [ -n "$1" ];then
@@ -13,4 +13,9 @@ if [ -n "$2" ];then
     hdfs=$old_hdfs
 fi
 
-hadoop fs -ls $hdfs/$path 
+user=`whoami`
+if [ -n "$3" ];then
+    user=$3
+fi
+
+hadoop fs -ls $hdfs/$user/$path 
