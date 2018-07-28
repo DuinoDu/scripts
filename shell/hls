@@ -1,0 +1,16 @@
+#!/bin/bash
+
+old_hdfs=hdfs://hobot-bigdata/user/`whoami`
+new_hdfs=hdfs://hobot-bigdata-aliyun/user/`whoami`
+
+path=.
+if [ -n "$1" ];then
+    path=$1
+fi
+
+hdfs=$new_hdfs
+if [ -n "$2" ];then
+    hdfs=$old_hdfs
+fi
+
+hadoop fs -ls $hdfs/$path 
