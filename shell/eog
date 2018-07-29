@@ -1,0 +1,20 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# File              : /home/users/min.du/project/scripts/shell/eog
+# Author            : du min <min.du@hobot.cc>
+# Date              : 29.07.2018
+# Last Modified Date: 29.07.2018
+# Last Modified By  : du min <min.du@hobot.cc>
+# -*- coding: utf-8 -*-
+
+import sys, os
+from PIL import Image
+
+if len(sys.argv) < 2:
+    print('Usage: eog <image path>')
+    sys.exit(0)
+
+img = Image.open(sys.argv[1])
+print("%s | height:%d, width:%d" % (os.path.split(sys.argv[1])[1], img.height, img.width))
+img.show()
+print('Image displayed')
