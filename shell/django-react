@@ -1,0 +1,131 @@
+#!/bin/bash -e
+# File              : django-react
+# Author            : duino <472365351duino@gmail.com>
+# Date              : 04.08.2018
+# Last Modified Date: 04.08.2018
+# Last Modified By  : duino <472365351duino@gmail.com>
+
+function usage() {
+    echo "usage:"
+    echo "django-react [project_name]"
+    exit 1
+}
+
+if [ ! -n "$1" ];then
+    usage
+fi
+
+project=$1
+
+function check_django_env() {
+    py_ver=`python -c 'import sys; print(sys.version_info[:][0])'`
+    if [[ $py_ver == '2' ]]; then
+        echo "current using python2, switch to python3 instead."
+        cd ~
+        virtualenv -p python3 py3
+        source py3/bin/activate
+    else
+        echo "current using python3"
+    fi
+    pip install django graphene_django
+}
+
+function install_nodejs() {
+    version=6.14.3
+    export NVM_NODEJS_ORG_MIRROR=https://npm.taobao.org/mirrors/node
+    git clone https://github.com/creationix/nvm.git ~/.nvm
+    source ~/.nvm/nvm.sh
+    nvm install $version
+    nvm_install_latest_npm
+    npm config set registry https://registry.npm.taobao.org
+    npm config get registry
+    
+    shrc=$HOME/.bashrc
+    if [ -f $HOME/.zshrc  ];then
+            shrc=$HOME/.zshrc
+    fi
+    echo "source ~/.nvm/nvm.sh" >> $shrc
+}
+
+function check_react_env() {
+    if hash node 2>/dev/null;then
+        echo "Find node : `which node`"
+    else
+        echo 'node not found, please install node first.'
+        read -p "Install node? [y/n]" answer
+        if [[ $answer = "n" ]]; then
+            exit
+        fi
+        install_nodejs
+    fi
+    npm install -g create-react-app
+}
+
+
+if [ -d $project ];then
+    read -p "$project already exists, override? [y/n]" answer
+    if [[ $answer = "n" ]]; then
+        exit
+    fi
+    rm -rf $project
+fi
+mkdir $project
+cd $project
+
+# python and django
+check_django_env
+django-admin.py startproject backend
+cd backend
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+# add ALLOW_HOSTS
+sed -i -e "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = ['$(hostname)',]/g" backend/settings.py
+# add static path
+echo "STATIC_ROOT = os.path.join(BASE_DIR, 'static')" >> backend/settings.py
+echo "STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)" >> backend/settings.py
+python manage.py runserver 0.0.0.0:8000
+cd ..
+
+# create build file
+echo "#!/bin/bash
+cd frontend
+npm run build
+cd ../backend
+rm build -rf
+cp ../frontend/build -r .
+python manage.py collectstatic" > build
+chmod +x build
+
+# add index.html to django url.py
+sed -e '17 a from django.urls import re_path' \
+    -e '17 a from django.views.generic import TemplateView' \
+    -e "20 a \ \ \ \ re_path('.*', TemplateView.as_view(template_name='index.html'))," \
+    -i backend/backend/urls.py
+# set TEMPLATE DIRS
+sed -e "s/'DIRS': \[\],/'DIRS':\ ['build'],/g" \
+    -i backend/backend/settings.py
+
+# nodejs npm and react
+check_react_env
+create-react-app frontend
+#cd frontend && npm start ## cd ..
+./build
+cd backend && python manage.py runserver 0.0.0.0:8000
+cd ..
+
+# create git
+echo "backend/build
+backend/static
+*.pyc
+__pycache__
+frontend/build
+frontend/node_modules
+*.swp
+*.swp
+" > .gitignore
+
+echo "### $project" > README.md
+git init
+git add .
+git commit -m 'init using django-react'
