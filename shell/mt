@@ -1,0 +1,31 @@
+#!/bin/bash -e
+
+remote=mosvm03.hogpu.cc
+username=min.du
+
+function usage() {
+    echo "usage:"
+    echo "mt [cmd]"
+}
+
+while getopts "h:" arg
+do
+    case $arg in 
+        h)
+            usage
+            exit
+            ;;
+        ?)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+if [[ "$#" -eq 0 ]]; then
+    echo "no input"
+    usage
+    exit
+fi
+
+ssh $username@$remote "$*"
