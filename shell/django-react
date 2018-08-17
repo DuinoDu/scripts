@@ -17,6 +17,11 @@ fi
 
 project=$1
 
+SED=sed
+if hash gsed 2>/dev/null;then
+    SED=gsed
+fi
+
 function check_django_env() {
     py_ver=`python -c 'import sys; print(sys.version_info[:][0])'`
     if [[ $py_ver == '2' ]]; then
@@ -78,9 +83,12 @@ django-admin.py startproject backend
 cd backend
 python manage.py makemigrations
 python manage.py migrate
-python manage.py createsuperuser
+#python manage.py createsuperuser 
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', '', '123qweasd')" \
+    | python manage.py shell
+
 # add ALLOW_HOSTS
-sed -i -e "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = ['$(hostname)',]/g" backend/settings.py
+$SED -i -e "s/ALLOWED_HOSTS = \[.*\]/ALLOWED_HOSTS = ['$(hostname)',]/g" backend/settings.py
 # add static path
 echo "STATIC_ROOT = os.path.join(BASE_DIR, 'static')" >> backend/settings.py
 echo "STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)" >> backend/settings.py
@@ -92,18 +100,18 @@ echo "#!/bin/bash
 cd frontend
 npm run build
 cd ../backend
-rm build -rf
-cp ../frontend/build -r .
+rm -rf build 
+cp -r ../frontend/build  .
 python manage.py collectstatic" > build
 chmod +x build
 
 # add index.html to django url.py
-sed -e '17 a from django.urls import re_path' \
-    -e '17 a from django.views.generic import TemplateView' \
+$SED -e "17 a from django.urls import re_path" \
+    -e "17 a from django.views.generic import TemplateView" \
     -e "20 a \ \ \ \ re_path('.*', TemplateView.as_view(template_name='index.html'))," \
     -i backend/backend/urls.py
 # set TEMPLATE DIRS
-sed -e "s/'DIRS': \[\],/'DIRS':\ ['build'],/g" \
+$SED -e "s/'DIRS': \[\],/'DIRS':\ ['build'],/g" \
     -i backend/backend/settings.py
 
 # add nginx and uwsgi
@@ -111,8 +119,7 @@ cd backend
 echo "server {
     listen 80 default_server;
     server_name localhost;
-    charset utf-8;
-    location / {
+    charset utf-8; location / {
        include uwsgi_params;
        uwsgi_pass 127.0.0.1:8002;
        uwsgi_read_timeout 2;

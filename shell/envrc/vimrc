@@ -1,45 +1,30 @@
-" File              : vimrc
-" Author            : du min <min.du@hobot.cc>
-" Date              : 13.07.2018
-" Last Modified Date: 13.07.2018
-" Last Modified By  : du min <min.du@hobot.cc>
+"""""""""""""""""
+" basic setting "
+"""""""""""""""""
 set nocompatible
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
-"Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'Yggdroot/indentLine'
-Plugin 'vim-scripts/python_fold'
-
-Plugin 'alpertuna/vim-header'
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
-
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'epilande/vim-react-snippets'
-
-call vundle#end()
-filetype plugin indent on
-
-:colorscheme elflord
+syntax on
+colorscheme elflord
+set background=dark
+set nowrap 
+set fileformat=unix
+set tabstop=4 "tab length"
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set scrolloff=5 
+set laststatus=2
+set ignorecase
+set hlsearch
+set autoread
 set number
 set cursorline
 set smartindent
 set foldenable
 set foldmethod=syntax
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 
+"""""""""""""""""""""""""""""
+" filetype specific setting "
+"""""""""""""""""""""""""""""
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype css setlocal ts=2 sts=2 sw=2
 autocmd Filetype scss setlocal ts=2 sts=2 sw=2
@@ -48,13 +33,78 @@ autocmd Filetype md setlocal ts=2 sts=2 sw=2
 autocmd Filetype markdown setlocal ts=2 sts=2 sw=2
 autocmd Filetype python setlocal ts=4 sts=4 sw=4
 
+
+""""""""""""""""
+" package list "
+""""""""""""""""
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+"-- common --"
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/syntastic'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'Yggdroot/indentLine'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+"Plugin 'alpertuna/vim-header'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'davidhalter/jedi-vim'   "code complete
+Plugin 'mileszs/ack.vim'        "keyword search, brew install ack
+Plugin 'ctrlpvim/ctrlp.vim'     "filename search, <c-p>
+Plugin 'majutsushi/tagbar'      "show class function, brew install ctags 
+"-- python --"
+Plugin 'python-mode/python-mode'
+Plugin 'vim-scripts/python_fold'
+"Plugin 'Vimjas/vim-python-pep8-indent'
+"-- javascript --"
+Plugin 'mxw/vim-jsx'
+Plugin 'pangloss/vim-javascript'
+Plugin 'epilande/vim-react-snippets'
+call vundle#end()
+filetype plugin indent on
+
+"--------"
+" common "
+"--------"
+
+"syntastic
+"auto-pairs
+"vim-powerline
+
 "nerdtree
-"autocmd vimenter * NERDTree
-"map <C-b> :NERDTreeMirror<CR>
-"map <C-b> :NERDTreeToggle<CR>
+let NERDTreeChDirMode=1
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\~$', '\.pyc', '\.swp$']
+map <c-y> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeAutoCenter=1
+let NERDTreeWinSize=25
+" 在终端启动vim时，共享NERDTree
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '☒',
+    \ "Unknown"   : "?"
+    \ }
+" }}}
 
+"nerdcommenter' <Leader>c-space
+let g:NERDSpaceDelims = 1
 
-"UltiSnips
+" ultisnips, vim-snippets
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-v>"
 let g:UltiSnipsJumpBackwardTrigger="<c-c>"
@@ -63,11 +113,42 @@ let g:snips_email="472365351duino@gmail.com"
 let g:snips_github="github.com/duinodu"
 let g:ultisnips_python_style="google"
 
+"" vim-header
+"let g:header_field_author = 'du min'
+"let g:header_field_author_email = 'min.du@hobot.cc'
+"map <F4> :AddHeader<CR>
+"autocmd bufnewfile *.py :AddHeader
+
+" indentLine
+
+" jedi-vim
+let g:jedi#popup_on_dot = 0
+let g:jedi#completions_command = "<c-p>"
+autocmd FileType python setlocal completeopt-=preview " disable display doc-str window
+
+" ack
+map <Leader>f :Ack<Space>
+map <Leader>ff :AckFile<Space>
+vnoremap <Leader>f y:Ack <C-r>=fnameescape(@")<CR><CR>
+
+"tagbar
+map <c-t> :TagbarToggle<CR>
+
+"--------"
+" python "
+"--------"
+" pymode
+let g:pymode_python = 'python2'
+let g:pymode = 0
+
+"------------"
+" javascript "
+"------------"
 "vim-jsx
 let g:jsx_ext_required = 0
 
-"vim-header
-let g:header_field_author = 'du min'
-let g:header_field_author_email = 'min.du@hobot.cc'
-map <F4> :AddHeader<CR>
-autocmd bufnewfile *.py :AddHeader
+
+"-----------------"
+" custom shortcut "
+"-----------------"
+nmap <c-a> viw
