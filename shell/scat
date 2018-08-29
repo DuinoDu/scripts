@@ -1,0 +1,8 @@
+#!/bin/bash -e
+if [ ! -n "$1" ];then
+    echo "scat [remote file]"
+    exit 1
+fi
+scp $1 . 
+cat $(basename $1)
+rm $(basename $1)
