@@ -1,7 +1,8 @@
 #!/bin/bash
 
 old_hdfs=hdfs://hobot-bigdata/user
-new_hdfs=hdfs://hobot-bigdata-aliyun/user
+#new_hdfs=hdfs://hobot-bigdata-aliyun/user
+new_hdfs=hdfs://hobot-mosdata/user
 
 path=.
 if [ -n "$1" ];then

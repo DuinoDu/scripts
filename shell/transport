@@ -1,0 +1,50 @@
+#!/bin/bash -e
+# File              : run
+# Author            : du min <min.du@hobot.cc>
+# Date              : 16.08.2018
+# Last Modified Date: 17.08.2018
+# Last Modified By  : du min <min.du@hobot.cc>
+
+user=min.du
+gpu=007
+debug="0"
+
+
+function usage() {
+    echo "usage:"
+    echo "run [-g gpuid]"
+}
+
+while getopts "g:h" arg
+do
+    case $arg in 
+        g)
+            gpu=${OPTARG}
+            ;;
+        h)
+            usage
+            exit
+            ;;
+        ?)
+            usage
+            exit 1
+            ;;
+    esac
+done
+
+#003 004 006 007 008 021 023 025
+host=yz-gpu${gpu}.hogpu.cc
+echo "transport to $host"
+
+remote_home=/home/users/min.du
+src=$HOME/project
+dst=$remote_home/project
+
+cur_path=`pwd`
+project_name=${cur_path#$src/}
+project_name=$(echo "$project_name" | cut -d'/' -f1)
+
+cd $src
+rsync -avrztopg --progress --quiet --exclude "*.swp" \
+    $project_name $user@$host:$dst
+echo "rsync $src/$project_name to $dst/$project_name"
