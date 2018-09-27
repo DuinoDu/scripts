@@ -32,7 +32,6 @@ def main(args):
     ret = run('hadoop fs -ls %s' % args.hdfs2).split('\n')
     files2 = [x.split(' ')[-1].split(args.hdfs2)[-1] for x in ret if 'hdfs' in x]
 
-<<<<<<< HEAD
     files_to_hdfs2 = [x for x in files1 if x not in files2]
     for f in files_to_hdfs2:
         run('hadoop fs -cp %s%s %s' % (args.hdfs1, f, args.hdfs2))
@@ -44,8 +43,6 @@ def main(args):
     print('finish')
 
 
-=======
->>>>>>> 23ea6920c4fe1edf8c9d5933d1049b8f3c78cbc2
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='rsync folders in two hdfs')
     parser.add_argument('--hdfs1', default='hdfs://hobot-bigdata/user/min.du/common/models/', type=str, help='first hdfs path')
