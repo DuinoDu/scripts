@@ -26,8 +26,6 @@ def main(args):
         print(l)
     
 
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='rsync folders in two hdfs')
     parser.add_argument('--hdfs1', default='hdfs://hobot-bigdata/user/min.du/common/models', type=str, help='first hdfs path')
