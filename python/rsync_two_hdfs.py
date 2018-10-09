@@ -36,9 +36,10 @@ def main(args):
     for f in files_to_hdfs2:
         run('hadoop fs -cp %s%s %s' % (args.hdfs1, f, args.hdfs2))
 
-    files_to_hdfs1 = [x for x in files2 if x not in files1]
-    for f in files_to_hdfs1:
-        run('hadoop fs -cp %s%s %s' % (args.hdfs2, f, args.hdfs1))
+    if args.bi:
+        files_to_hdfs1 = [x for x in files2 if x not in files1]
+        for f in files_to_hdfs1:
+            run('hadoop fs -cp %s%s %s' % (args.hdfs2, f, args.hdfs1))
     
     print('finish')
 
@@ -47,5 +48,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='rsync folders in two hdfs')
     parser.add_argument('--hdfs1', default='hdfs://hobot-bigdata/user/min.du/common/models/', type=str, help='first hdfs path')
     parser.add_argument('--hdfs2', default='hdfs://hobot-mosdata/user/min.du/common/models/', type=str, help='second hdfs path')
+    parser.add_argument('--bi', dest='bi', action='store_true', help='bi direction')
     args = parser.parse_args()
     main(args)
