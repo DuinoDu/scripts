@@ -20,6 +20,8 @@ def main(args):
     ret = run('hadoop version')
     if 'not found' in ret:
         raise IOError, "hadoop not found"
+    args.hdfs1 = os.path.join(args.hdfs1, args.dir)
+    args.hdfs2 = os.path.join(args.hdfs2, args.dir)
 
     if not args.hdfs1.endswith('/'):
         args.hdfs1 += '/'
@@ -46,8 +48,9 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='rsync folders in two hdfs')
-    parser.add_argument('--hdfs1', default='hdfs://hobot-bigdata/user/min.du/common/models/', type=str, help='first hdfs path')
-    parser.add_argument('--hdfs2', default='hdfs://hobot-mosdata/user/min.du/common/models/', type=str, help='second hdfs path')
+    parser.add_argument('--hdfs1', default='hdfs://hobot-bigdata/user/min.du', type=str, help='first hdfs path')
+    parser.add_argument('--hdfs2', default='hdfs://hobot-mosdata/user/min.du', type=str, help='second hdfs path')
+    parser.add_argument('--dir', default='common/models/', type=str, help='description', required=True)
     parser.add_argument('--bi', dest='bi', action='store_true', help='bi direction')
     args = parser.parse_args()
     main(args)
