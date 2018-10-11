@@ -1,0 +1,29 @@
+#!/bin/bash
+
+function usage() {
+    echo "hcp src hdfs_dir [1 if using mt cluster else null]"
+}
+
+if [ ! -n "$1" ];then
+    usage
+    exit 1
+fi
+
+if [ ! -n "$2" ];then
+    usage
+    exit 1
+fi
+
+user=`whoami`
+
+#new_hdfs=hdfs://hobot-bigdata-aliyun/user
+hdfs1=hdfs://hobot-bigdata/user
+hdfs2=hdfs://hobot-mosdata/user
+hdfs=$hdfs1
+if [ -n "$3" ];then
+    hdfs=$hdfs2
+fi
+
+
+echo "hadoop fs -put $1 $hdfs/$user/$2"
+hadoop fs -put $1 $hdfs/$user/$2
