@@ -1,0 +1,3 @@
+#!/bin/bash
+dirname=`date +%Y%m%d_%H%M%S`
+mkdir $dirname
