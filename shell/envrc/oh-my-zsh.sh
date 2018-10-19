@@ -42,14 +42,15 @@
 #make
 #make install
 
-# oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-chsh -s /bin/zsh
+## oh-my-zsh
+#sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+#chsh -s /bin/zsh
 
 # oh-my-zsh plugin
+ZSH_CUSTOM=/home/duino/.oh-my-zsh/custom
 git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 echo "add \"plugins=(zsh-autosuggestions git)\" to .zshrc"
 
 # oh-my-zsh plugin
-brew install zsh-syntax-highlighting
+sudo apt install zsh-syntax-highlighting
 echo "add \"source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh\" to .zshrc"
