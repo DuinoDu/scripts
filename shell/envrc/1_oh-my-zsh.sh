@@ -4,7 +4,6 @@ sudo apt-get install tmux zsh curl
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-chsh -s /bin/zsh
 
 # oh-my-zsh plugin
 ZSH_CUSTOM=/home/duino/.oh-my-zsh/custom
@@ -13,6 +12,8 @@ git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh
 # oh-my-zsh plugin
 sudo apt install zsh-syntax-highlighting
 rm ~/.zshrc && cp zshrc ~/.zshrc
+
+chsh -s /bin/zsh
 
 
 ### deprecated ###
