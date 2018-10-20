@@ -1,0 +1,7 @@
+#!/bin/bash -ex
+
+cd /etc/apt
+sudo mv source.list source.list.bak
+cd -
+sudo cp source.list_tsinghua.ubuntu18.04 /etc/apt/source.list
+echo "update tsinghua source for ubuntu 18.04"
