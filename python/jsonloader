@@ -1,0 +1,34 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from __future__ import print_function
+import os, sys
+import json
+import cPickle as pickle
+
+
+if len(sys.argv) < 2:
+    print("Usage: jsonloader [json] [ipy, option]")
+    sys.exit(0)
+
+with open(sys.argv[1], 'r') as fid:
+    if sys.argv[1].endswith('.json'):
+        try:
+            var = json.load(fid)
+        except Exception as e:
+            print('Bad json file, exit')
+            sys.exit(0)
+    elif sys.argv[1].endswith('.pkl'): 
+        var = pickle.load(fid)
+
+if isinstance(var, list):
+    print('list, ', len(var))
+elif isinstance(var, dict):
+    print('dict', var.keys())
+else:
+    print(type(var))
+
+if len(sys.argv) >= 3 and 'ipy' in sys.argv[2]:
+    print('play with var')
+    __import__('IPython').embed()
+    pass
