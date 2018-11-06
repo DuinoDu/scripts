@@ -1,2 +1,2 @@
 #!/bin/bash
-echo `whoami`@`hostname`:`pwd`
+echo `whoami`@`hostname`:`pwd`/$1
