@@ -1,8 +1,8 @@
 #!/bin/bash
 
 hdfs1=hdfs://hobot-bigdata/user
-#hdfs2=hdfs://hobot-mosdata/user
-hdfs2=hdfs://hobot-bigdata-aliyun/user
+hdfs2=hdfs://hobot-mosdata/user
+hdfs3=hdfs://hobot-bigdata-aliyun/user
 
 path=.
 if [ -n "$1" ];then
@@ -11,8 +11,15 @@ fi
 
 hdfs=$hdfs1
 if [ -n "$2" ];then
-    hdfs=$hdfs2
+    if [ "$2"x = "mt"x  ];then
+        hdfs=$hdfs2
+    elif [ "$2"x = "ali"x  ];then
+        hdfs=$hdfs3
+    else
+        hdfs=$hdfs1
+    fi
 fi
+echo "use $hdfs"
 
 user=`whoami`
 if [ -n "$3" ];then
