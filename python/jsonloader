@@ -28,6 +28,22 @@ elif isinstance(var, dict):
 else:
     print(type(var))
 
+if sys.argv[1].endswith('.pkl'): 
+    sum_roi = 0
+    keyname = None
+    if 'boxes' in var[0]:
+        keyname = 'boxes'
+    elif 'pred_kps' in var[0]:
+        keyname = 'pred_kps'
+    elif 'keypoints' in var[0]:
+        keyname = 'keypoints'
+
+    if keyname is not None:
+        for roi in var:
+            sum_roi += roi[keyname].shape[0]
+        print('num boxes: %d' % sum_roi)
+
+
 if len(sys.argv) >= 3 and 'ipy' in sys.argv[2]:
     print('play with var')
     __import__('IPython').embed()
