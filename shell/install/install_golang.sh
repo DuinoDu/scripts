@@ -13,7 +13,12 @@ if [ ! -d $prefix ];then
 fi
 
 curl $target -fJO
+
+filename=ggo1.11.5.linux-amd64.tar.gz
+#hadoop fs -get hdfs://hobot-bigdata/user/min.du/go1.11.5.linux-amd64.tar.gz
+
 tar -C $prefix -xzf $filename
+rm $filename 
 
 export PATH=$PATH:$prefix/go/bin
 echo "export PATH=\$PATH:$prefix/go/bin"
