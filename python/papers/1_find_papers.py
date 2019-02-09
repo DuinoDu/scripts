@@ -9,9 +9,9 @@ import re
 import json
 import tqdm
 
-keywords = ['context']
+keywords = ['pose', 'skeleton']
 
-not_keywords = ['speech', 'sentense']
+not_keywords = ['shape', 'object']
 
 class Article(object):
 
@@ -213,7 +213,7 @@ if __name__ == "__main__":
     parser.add_argument('--skip_keywords', default='', type=str, help='skip keywords')
     args = parser.parse_args()
 
-    keywords = args.keywords.split(',') 
-    not_keywords = args.skip_keywords.split(',') 
+    #keywords = args.keywords.split(',') 
+    #not_keywords = args.skip_keywords.split(',') 
 
     main(args)
