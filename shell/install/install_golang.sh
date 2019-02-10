@@ -14,7 +14,7 @@ fi
 
 curl $target -fJO
 
-filename=ggo1.11.5.linux-amd64.tar.gz
+filename=go1.11.5.linux-amd64.tar.gz
 #hadoop fs -get hdfs://hobot-bigdata/user/min.du/go1.11.5.linux-amd64.tar.gz
 
 tar -C $prefix -xzf $filename
