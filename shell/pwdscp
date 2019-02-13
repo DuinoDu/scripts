@@ -1,2 +1,3 @@
 #!/bin/bash
-echo `whoami`@`hostname`:`pwd`/$1
+cur=$(realpath `pwd`)
+echo `whoami`@`hostname`:$cur/$1
