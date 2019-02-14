@@ -5,7 +5,7 @@ from __future__ import print_function
 import os, sys
 import json
 import cPickle as pickle
-
+import numpy as np
 
 if len(sys.argv) < 2:
     print("Usage: jsonloader [json] [ipy, option]")
@@ -28,7 +28,7 @@ elif isinstance(var, dict):
 else:
     print(type(var))
 
-if sys.argv[1].endswith('.pkl'): 
+if sys.argv[1].endswith('.pkl') and isinstance(var, list): 
     sum_roi = 0
     keyname = None
     if 'boxes' in var[0]:
@@ -37,12 +37,10 @@ if sys.argv[1].endswith('.pkl'):
         keyname = 'pred_kps'
     elif 'keypoints' in var[0]:
         keyname = 'keypoints'
-
     if keyname is not None:
         for roi in var:
             sum_roi += roi[keyname].shape[0]
         print('num boxes: %d' % sum_roi)
-
 
 if len(sys.argv) >= 3 and 'ipy' in sys.argv[2]:
     print('play with var')
