@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+cfg=".synccode.ini"
+if [ ! -f $cfg ];then
+    echo "please create .synccode.ini"
+    exit
+fi
+src=$(basename `pwd`)
+remote=`cat $cfg`
+
+if [ "$(basename $remote)"x = "$src"x ];then
+    remote=$(dirname $remote)
+fi
+
+cd ..
+echo "$src/.git" >> $src/ignore_rsync
+rsync -avrztopg --progress --exclude-from $src/ignore_rsync $src $remote
+rm $src/ignore_rsync
