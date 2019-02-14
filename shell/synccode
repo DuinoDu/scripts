@@ -14,5 +14,10 @@ fi
 
 cd ..
 echo "$src/.git" >> $src/ignore_rsync
+echo "$src/.*.swp" >> $src/ignore_rsync
+echo "$src/.*.swo" >> $src/ignore_rsync
+if [ -n "$1" ];then
+    echo "$src/$1" >> $src/ignore_rsync
+fi
 rsync -avrztopg --progress --exclude-from $src/ignore_rsync $src $remote
 rm $src/ignore_rsync
