@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+if hash tmux 2>/dev/null;then
+    tmux list-sessions
+else
+    echo 'tmux not found, please install tmux first.'
+    exit
+fi
