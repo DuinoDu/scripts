@@ -1,7 +1,8 @@
 #!/bin/bash -e
 
-ip=`ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'`
-port=8080
+#ip=`ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'`
+ip=`ifconfig | grep "inet " | head -n 1  | awk '{print $2}'`
+port=5160
 if [ -n "$1" ];then
     port=$1
 fi
