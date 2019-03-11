@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "kills [cmd name]"
+    exit 1
+fi
+
+ps aux | grep -ie $1 | awk '{print $2}' | xargs kill -9
