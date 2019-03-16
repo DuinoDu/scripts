@@ -1,10 +1,17 @@
 #!/bin/bash -e
 
 #ip=`ip addr | grep 'state UP' -A2 | tail -n1 | awk '{print $2}' | cut -f1  -d'/'`
-ip=`ifconfig | grep "inet " | head -n 1  | awk '{print $2}'`
+#ip=`ifconfig | grep "inet " | head -n 1  | awk '{print $2}'`
+ip=`hostname`
 port=5160
 if [ -n "$1" ];then
     port=$1
 fi
 echo "$ip:$port"
-python -m SimpleHTTPServer $port
+
+ret=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
+if [ $ret -eq 0  ]; then
+    python -m http.server $port
+else 
+    python -m SimpleHTTPServer $port
+fi
