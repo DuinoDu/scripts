@@ -13,7 +13,7 @@ mv samplemod $libname
 cd $libname
 rm .git -rf
 
-mv sample $libname
+mv samplemod $libname
 sed -i -e "s/samplemod/${libname}/g" setup.py
 sed -i -e "s/sample/${libname}/g" tests/context.py 
 sed -i -e "s/sample/${libname}/g" tests/test_basic.py
