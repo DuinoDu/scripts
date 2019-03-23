@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "killme [cmd name]"
+    exit 1
+fi
+
+kill -9 $(ps aux|grep $1|grep -v grep | awk '{print $2}')
