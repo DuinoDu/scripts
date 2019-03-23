@@ -24,6 +24,7 @@ sed -i -e "s/sample/${libname}/g" \
        -e "s/YEAR/${year}/g" \
     docs/conf.py 
 sed -i -e "s/sample/${libname}/g" docs/index.rst
+sed -i -e "s/sample/${libname}/g" Makefile
 
 git init
 git add .
