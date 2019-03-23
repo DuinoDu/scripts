@@ -6,3 +6,6 @@ else
     echo 'tmux not found, please install tmux first.'
     exit
 fi
+
+read -p "open which session? " id
+tmux attach-session -t $id
