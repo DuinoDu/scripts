@@ -23,5 +23,10 @@ if [ -n "$3" ];then
     user=$3
 fi
 
-echo "hadoop fs -ls $hdfs/$user/$path"
-hadoop fs -ls $hdfs/$user/$path 
+if [[ $1 == "hdfs"*  ]]; then
+    echo "hadoop fs -ls $1"
+    hadoop fs -ls $1
+else
+    echo "hadoop fs -ls $hdfs/$user/$path"
+    hadoop fs -ls $hdfs/$user/$path 
+fi
