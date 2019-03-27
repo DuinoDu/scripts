@@ -12,11 +12,20 @@ mv samplemod $libname
 
 cd $libname
 rm .git -rf
-
 mv sample $libname
+
+year=`date +"%Y"`
+user=`whoami`
+
 sed -i -e "s/samplemod/${libname}/g" setup.py
 sed -i -e "s/sample/${libname}/g" tests/context.py 
 sed -i -e "s/sample/${libname}/g" tests/test_basic.py
+sed -i -e "s/sample/${libname}/g" \
+       -e "s/USER/${user}/g" \
+       -e "s/YEAR/${year}/g" \
+    docs/conf.py 
+sed -i -e "s/sample/${libname}/g" docs/index.rst
+sed -i -e "s/sample/${libname}/g" Makefile
 
 git init
 git add .
