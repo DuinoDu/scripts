@@ -5,4 +5,5 @@ if [ ! -n "$1" ];then
     exit 1
 fi
 
-kill -9 $(ps aux|grep $1|grep -v grep | awk '{print $2}')
+PIDs=$(ps ux | grep "$1" | grep -v grep | awk '{print $2}')
+kill -9 $PIDs
