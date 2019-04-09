@@ -4,4 +4,13 @@ if [ ! -n "$1" ];then
     exit 1
 fi
 
+echo $1
+
+if [[ "$1" == *" "*  ]]; then
+    echo $1
+else
+   echo "NO" 
+fi
+exit
+
 tar -zcvf $1.tar.gz $1
