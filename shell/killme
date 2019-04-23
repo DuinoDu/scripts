@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "killme [cmd name]"
+    exit 1
+fi
+
+PIDs=$(ps ux | grep "$1" | grep -v grep | awk '{print $2}')
+kill -9 $PIDs

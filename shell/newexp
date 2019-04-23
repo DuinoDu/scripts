@@ -1,0 +1,12 @@
+#!/bin/bash -e
+
+if [ ! -n "$1" ];then
+    echo "Usage: newexp [exp name]"
+    exit 1
+fi
+expname=$1
+git clone https://github.com/duinodu/submitjob $expname
+cd $expname
+sed -i -e "s/%expname%/${expname}/g" generate.sh
+sed -i -e "s/%expname%/${expname}/g" Makefile
+rm .git -rf

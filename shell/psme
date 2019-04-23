@@ -1,0 +1,8 @@
+#!/bin/bash 
+
+if [ ! -n "$1" ];then
+    echo "psme [command name]"
+    exit 1
+fi
+
+exec ps ux | grep "$1"

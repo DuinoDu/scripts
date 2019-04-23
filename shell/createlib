@@ -12,6 +12,7 @@ mv samplemod $libname
 
 cd $libname
 rm .git -rf
+mv sample $libname
 
 year=`date +"%Y"`
 user=`whoami`

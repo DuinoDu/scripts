@@ -1,3 +1,9 @@
 #!/bin/bash
 cur=$(realpath `pwd`)
-echo `whoami`@`hostname`:$cur/$1
+if [ ! -n "$1" ];then
+    echo `whoami`@`hostname`:$cur
+elif [[ $1 == "/"*  ]]; then
+    echo `whoami`@`hostname`:$1
+else
+    echo `whoami`@`hostname`:$cur/$1
+fi

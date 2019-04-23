@@ -8,4 +8,4 @@ else
 fi
 
 read -p "open which session? " id
-tmux attach-session -t $id
+exec tmux attach-session -t $id
