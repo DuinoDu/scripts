@@ -21,6 +21,16 @@ set cursorline
 set smartindent
 set foldenable
 set foldmethod=syntax
+set fileencodings=utf-8,gb2312,gb18030,gbk,ucs-bom,cp936,latin1
+set enc=utf8
+set fencs=utf8,gbk,gb2312,gb18030
+" set leader "
+let mapleader = ","
+let maplocalleader = "\\"
+" quick edit ~/.vimrc
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
 
 """""""""""""""""""""""""""""
 " filetype specific setting "
@@ -32,6 +42,23 @@ autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
 autocmd Filetype md setlocal ts=2 sts=2 sw=2
 autocmd Filetype markdown setlocal ts=2 sts=2 sw=2
 autocmd Filetype python setlocal ts=4 sts=4 sw=4
+
+"""""""
+" map "
+"""""""
+nnoremap gf <C-W>gf
+vnoremap gf <C-W>gf
+
+
+""""""""""""
+" set path "
+""""""""""""
+if match(expand('%:p'), 'aiot_face_dev') > -1
+    set path+=$HOME/project/aiot_face_dev
+endif
+if match(expand('%:p'), 'smart_iot_multitask_all') > -1
+    set path+=$HOME/project/smart_iot_multitask_all
+endif
 
 
 """"""""""""""""
@@ -45,7 +72,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'Yggdroot/indentLine'
 Plugin 'SirVer/ultisnips'
@@ -54,18 +81,23 @@ Plugin 'iamcco/markdown-preview.vim'
 "Plugin 'alpertuna/vim-header'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'davidhalter/jedi-vim'   "code complete
+"Plugin 'davidhalter/jedi-vim'   "code complete
 Plugin 'mileszs/ack.vim'        "keyword search, brew install ack
 Plugin 'ctrlpvim/ctrlp.vim'     "filename search, <c-p>
 Plugin 'majutsushi/tagbar'      "show class function, brew install ctags 
+Plugin 'vim-scripts/taglist.vim'
+
 "-- python --"
-Plugin 'python-mode/python-mode'
+"Plugin 'python-mode/python-mode'
 Plugin 'vim-scripts/python_fold'
 "Plugin 'Vimjas/vim-python-pep8-indent'
 "-- javascript --"
 Plugin 'mxw/vim-jsx'
 Plugin 'pangloss/vim-javascript'
 Plugin 'epilande/vim-react-snippets'
+"-- others --"
+"Plugin 'fatih/vim-go'
+Plugin 'peterhoeg/vim-qml'
 call vundle#end()
 filetype plugin indent on
 
@@ -111,7 +143,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-c>"
 let g:snips_author="Duino"
 let g:snips_email="472365351duino@gmail.com"
 let g:snips_github="github.com/duinodu"
-let g:ultisnips_python_style="google"
+let g:ultisnips_python_style="numpy"
 
 "" vim-header
 "let g:header_field_author = 'du min'
@@ -121,10 +153,10 @@ let g:ultisnips_python_style="google"
 
 " indentLine
 
-" jedi-vim
-let g:jedi#popup_on_dot = 0
-let g:jedi#completions_command = "<c-p>"
-autocmd FileType python setlocal completeopt-=preview " disable display doc-str window
+"" jedi-vim
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#completions_command = "<c-p>"
+"autocmd FileType python setlocal completeopt-=preview " disable display doc-str window
 
 " ack
 map <Leader>f :Ack<Space>
@@ -137,16 +169,16 @@ map <c-t> :TagbarToggle<CR>
 "--------"
 " python "
 "--------"
-" pymode
-let g:pymode_python = 'python2'
-let g:pymode = 1
+"" pymode
+"let g:pymode_python = 'python2'
+"let g:pymode = 1
 "let g:pymode_run = 1
 "let g:pymode_run_bind = '<leader>t' 
-
 "let g:pymode_rope = 1
 "let g:pymode_rope_completion = 1
 "let g:pymode_rope_complete_on_dot = 1
 "let g:pymode_rope_completion_bind = '<C-Space>'
+let g:pymode_lint_checkers = []
 
 
 "------------"
