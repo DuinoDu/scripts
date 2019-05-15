@@ -11,7 +11,7 @@ echo "$ip:$port"
 
 ret=`python -c 'import sys; print("%i" % (sys.hexversion<0x03000000))'`
 if [ $ret -eq 0  ]; then
-    python -m http.server $port
+    python3.6 -m http.server $port
 else 
     python -m SimpleHTTPServer $port
 fi
