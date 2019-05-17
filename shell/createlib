@@ -5,13 +5,14 @@ if [ ! -n "$1" ];then
     exit 1
 fi
 
-libname=$1
+name=$1
 
-git clone https://github.com/duinodu/samplemod
-mv samplemod $libname
+git clone https://github.com/duinodu/samplemod $name
 
-cd $libname
-rm .git -rf
+cd $name
+rm -rf .git 
+
+libname=`echo $name | sed -e 's/-/_/g'`
 mv sample $libname
 
 year=`date +"%Y"`

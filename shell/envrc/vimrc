@@ -82,7 +82,8 @@ Plugin 'iamcco/markdown-preview.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 "Plugin 'davidhalter/jedi-vim'   "code complete
-Plugin 'mileszs/ack.vim'        "keyword search, brew install ack
+" keyword search, brew install ack, or curl https://beyondgrep.com/ack-2.28-single-file > ~/ack && chmod 0755 ~/ack
+Plugin 'mileszs/ack.vim'        
 Plugin 'ctrlpvim/ctrlp.vim'     "filename search, <c-p>
 Plugin 'majutsushi/tagbar'      "show class function, brew install ctags 
 Plugin 'vim-scripts/taglist.vim'
