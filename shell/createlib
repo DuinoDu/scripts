@@ -1,5 +1,12 @@
 #!/bin/bash -e
 
+SED=
+if ! hash gsed 2>/dev/null;then
+    SED=sed
+else
+    SED=gsed
+fi
+
 if [ ! -n "$1" ];then
     echo "Usage: createlib [lib name]"
     exit 1
@@ -13,21 +20,26 @@ cd $name
 rm -rf .git 
 
 libname=`echo $name | sed -e 's/-/_/g'`
-mv sample $libname
 
 year=`date +"%Y"`
 user=`whoami`
 
-sed -i -e "s/samplemod/${libname}/g" setup.py
-sed -i -e "s/sample/${libname}/g" tests/context.py 
-sed -i -e "s/sample/${libname}/g" tests/test_basic.py
-sed -i -e "s/sample/${libname}/g" \
-       -e "s/USER/${user}/g" \
-       -e "s/YEAR/${year}/g" \
-    docs/conf.py 
-sed -i -e "s/sample/${libname}/g" docs/index.rst
-sed -i -e "s/sample/${libname}/g" Makefile
+function update() {
+    $SED -i -e "s/sample/${libname}/g" \
+            -e "s/USER/${user}/g" \
+            -e "s/YEAR/${year}/g" \
+         $1
+}
 
+update src/sample/cli.py 
+update setup.py
+update Makefile
+update tests/context.py 
+update tests/test_basic.py
+update docs/index.rst
+update docs/conf.py 
+
+mv src/sample src/$libname
 git init
 git add .
 git commit -m 'init'
