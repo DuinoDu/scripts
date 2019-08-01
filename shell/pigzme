@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "pigz [folder name]"
+    exit 1
+fi
+
+tar cv $1 | pigz -p 16 -k > ${1}.tar.gz
