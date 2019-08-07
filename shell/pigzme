@@ -5,4 +5,4 @@ if [ ! -n "$1" ];then
     exit 1
 fi
 
-tar cv $1 | pigz -p 16 -k > ${1}.tar.gz
+tar cv $1 --exclude .git | pigz -p 16 -k > ${1}.tar.gz
