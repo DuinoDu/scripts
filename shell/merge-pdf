@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Merge pdfs
+"""
+
+from __future__ import print_function
+import argparse
+import os
+try:
+    import PyPDF2
+except ImportError as e:
+    print("Please pip install PyPDF2")
+    import sys; sys.exit()
+
+
+def main(args):
+    if args.output is None:
+        args.output = 'merged.pdf'
+
+    pdfs = sorted([os.path.join(args.input, x) for x in sorted(os.listdir(args.input)) if x.endswith('.pdf')])
+    
+    pdfWriter = PyPDF2.PdfFileWriter()
+    for filename in pdfs:
+        pdfFileObj = open(filename, 'rb')
+        pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+        for pageNum in range(pdfReader.numPages):
+            pageObj = pdfReader.getPage(pageNum)
+            pdfWriter.addPage(pageObj)
+    pdfOutput = open(args.output, 'wb')
+    pdfWriter.write(pdfOutput)
+    pdfOutput.close()
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--input', default=None, type=str, help='input', required=True)
+    parser.add_argument('--output', default=None, type=str, help='output')
+    args = parser.parse_args()
+    main(args)
