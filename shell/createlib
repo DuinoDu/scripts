@@ -28,6 +28,7 @@ function update() {
     $SED -i -e "s/sample/${libname}/g" \
             -e "s/USER/${user}/g" \
             -e "s/YEAR/${year}/g" \
+            -e "s/libname/${name}/g" \
          $1
 }
 
