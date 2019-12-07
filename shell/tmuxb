@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+if [ ! -n "$1" ];then
+    echo "tmuxb [name]"
+    exit 1
+fi
+
+if hash tmux 2>/dev/null;then
+    tmux new -s $1
+else
+    echo 'tmux not found, please install tmux first.'
+    exit
+fi
