@@ -1,0 +1,32 @@
+#!/bin/bash -e
+
+if [ -d hobot-utils-submitjob ];then
+    rm -rf hobot-utils-submitjob
+fi
+git clone git@gitlab.hobot.cc:ptd/experimental/aidi/toolkits/hobot-utils-submitjob.git
+cd hobot-utils-submitjob
+python setup.py install
+cd ..
+
+if [ -f Makefile ];then
+    read -p  "find Makefile, override? [y/n]" answer
+    if [[ $answer = "n" ]]; then
+        exit
+    else
+        rm Makefile
+    fi
+fi
+mv hobot-utils-submitjob/sample/Makefile .
+
+if [ -f submit.py ];then
+    read -p  "find submit.py, override? [y/n]" answer
+    if [[ $answer = "n" ]]; then
+        exit
+    fi
+fi
+mv hobot-utils-submitjob/sample/submit.py .
+
+rm -rf hobot-utils-submitjob
+echo ""
+echo "Create Makefile and submit.py"
+echo "Continue to config Makefile and submit.py to submit job to cluster"

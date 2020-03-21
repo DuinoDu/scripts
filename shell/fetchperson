@@ -9,9 +9,14 @@ _ssh=git@gitlab.hobot.cc:
 _http=http://gitlab.hobot.cc/
 
 git clone ${_ssh}ptd/experimental/alg/Popeye/awesome-tools/tools.hobot.git
+cd tools.hobot; git checkout dev; cd ..
 git clone ${_ssh}ptd/experimental/alg/Popeye/awesome-tools/dataperson.git
+cd dataperson; git checkout dev; cd ..
 git clone ${_ssh}ptd/experimental/alg/Popeye/awesome-tools/devperson.git
+cd devperson; git checkout dev; cd ..
 git clone ${_ssh}ptd/experimental/alg/Popeye/awesome-tools/person-workflow.git
+cd person-workflow; git checkout dev; cd ..
 git clone ${_ssh}ptd/experimental/alg/Popeye/awesome-tools/visperson.git
+cd visperson; git checkout dev; cd ..
 git clone ${_ssh}ptd/experimental/aidi/toolkits/wyy.git
 git clone ${_ssh}ptd/experimental/aidi/toolkits/hobot-utils-plotlog.git
