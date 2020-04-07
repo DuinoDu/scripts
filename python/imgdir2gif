@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+Convert imgs to gif
+"""
+
+from __future__ import print_function
+import argparse
+import os
+import sys
+import PIL.Image as Image
+
+
+def main(args):
+    if args.output is None:
+        args.output = 'output.gif'
+    imgfiles = args.input.split(',')
+    imgs = []
+    for imgfile in imgfiles:
+        temp = Image.open(imgfile)
+        imgs.append(temp)
+    imgs[0].save(args.output, save_all=True, append_images=imgs[1:], duration=args.duration, loop=args.loop)
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--input', default=None, type=str, help='input', required=True)
+    parser.add_argument('--duration', default='500', type=int, help='each frame durarion, millisecond')
+    parser.add_argument('--loop', default=1000, type=int, help='loop times')
+    parser.add_argument('--output', default=None, type=str, help='output')
+    args = parser.parse_args()
+    main(args)
