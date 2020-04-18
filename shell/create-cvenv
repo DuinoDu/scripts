@@ -1,0 +1,47 @@
+#!/bin/bash -e
+
+cd $HOME
+if [ ! -d venvs ];then
+    mkdir -p venvs
+fi
+cd venvs
+
+read -p "env name?" venv_name
+if [[ $venv_name = "" ]]; then
+    venv_name="myenv"
+fi
+if [ -d ${venv_name} ];then
+    read -p "${venv_name} exists, overwrite? [y/n]" answer
+    if [[ $answer = "y" ]]; then
+        rm -rf ${venv_name}
+        virtualenv ${venv_name} -p python3.6
+    fi
+else
+    virtualenv ${venv_name} -p python3.6
+fi
+source ${venv_name}/bin/activate
+
+read -p "cuda version? [cu92 | cu100 | cu101]" cuda
+pip install https://download.pytorch.org/whl/${cuda}/torch-1.4.0%2B${cuda}-cp36-cp36m-linux_x86_64.whl
+pip install https://download.pytorch.org/whl/${cuda}/torchvision-0.5.0%2B${cuda}-cp36-cp36m-linux_x86_64.whl
+
+cd $HOME
+
+if [ ! -d code/github ];then
+    mkdir -p code/github
+fi
+cd code/github
+
+if [ -d detectron2 ];then
+    read -p "re-download Detectron2? [y/n]" answer
+    if [[ $answer = "y" ]]; then
+        rm -rf detectron2
+        git clone https://github.com/facebookresearch/detectron2
+    fi
+else
+    git clone https://github.com/facebookresearch/detectron2
+fi
+cd detectron2
+python setup.py install
+
+echo "Start cv hacking !"
