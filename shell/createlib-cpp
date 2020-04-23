@@ -1,0 +1,56 @@
+#!/bin/bash -e
+
+SED=
+if ! hash gsed 2>/dev/null;then
+    SED=sed
+else
+    SED=gsed
+fi
+
+if [ ! -n "$1" ];then
+    echo "Usage: createlib-cpp [lib name]"
+    exit 1
+fi
+
+name=$1
+
+git clone https://github.com/duinodu/samplemod.pybind11 $name
+cd $name
+git submodule update --init --recursive
+
+libname=`echo $name | sed -e 's/-/_/g'`
+libname_upper=`echo $name | tr 'a-z' 'A-Z'`
+
+year=`date +"%Y"`
+user=`whoami`
+
+function update() {
+    $SED -i -e "s/sample/${libname}/g" \
+            -e "s/SAMPLE/${libname_upper}/g" \
+            -e "s/USER/${user}/g" \
+            -e "s/YEAR/${year}/g" \
+            -e "s/libname/${name}/g" \
+         $1
+}
+
+update src/sample/cli.py 
+update src/sample/core.py
+update src/sample/cpp2py_export.cc
+update src/sample/module.h
+update src/sample/module.cc
+update setup.py
+update Makefile
+update CMakeLists.txt
+update tests/context.py 
+update tests/test_basic.py
+update docs/index.rst
+update docs/conf.py 
+
+mv src/sample src/$libname
+
+git add .
+git commit -m 'init from template'
+
+make build
+make test
+make clean
