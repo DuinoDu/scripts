@@ -1,9 +1,13 @@
 #!/bin/bash
 cur=$(realpath `pwd`)
+
+local_host="`hostname --fqdn`"
+ip=`host $local_host 2>/dev/null | awk '{print $NF}'`
+
 if [ ! -n "$1" ];then
-    echo `whoami`@`hostname`:$cur
+    echo `whoami`@${ip}:$cur
 elif [[ $1 == "/"*  ]]; then
-    echo `whoami`@`hostname`:$1
+    echo `whoami`@${ip}:$1
 else
-    echo `whoami`@`hostname`:$cur/$1
+    echo `whoami`@${ip}:$cur/$1
 fi
