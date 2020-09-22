@@ -16,7 +16,7 @@ sudo apt-get install -y binutils-gold
 sudo apt-get install -y build-essential
 
 if [ ! -d ~/src/orbslam2 ];then
-    mkdir ~/src/orbslam2
+    mkdir -p  ~/src/orbslam2
 fi
 
 # Pangolin
