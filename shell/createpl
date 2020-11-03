@@ -23,8 +23,7 @@ if [ -d $name ];then
     fi
 fi
 
-# git clone https://github.com/duinodu/mnist.pl $name
-cp -r /home/users/min.du/workspace/P024_shape/mnist.pl $name
+git clone https://github.com/duinodu/mnist.pl $name
 
 cd $name
 rm -rf .git 
@@ -50,11 +49,14 @@ update docs/index.rst
 update docs/conf.py 
 update src/mnist_pl/data_test.py
 update src/mnist_pl/model_test.py
+update scripts/train.py
 
 mv src/mnist_pl src/$libname
 git init
 git add .
 git commit -m 'init pl project'
-make test
+git branch -M main
 
 echo "Start hacking!"
+echo "  If you want to run mnist training,"
+echo "  run with make debug or make train."
