@@ -5,5 +5,5 @@ if [ ! -n "$1" ];then
     exit 1
 fi
 
-tar cv $1 --exclude .git | pigz -p 16 -k > ${1}.tar.gz
+tar cvh $1 --exclude .git | pigz -p 16 -k > ${1}.tar.gz
 pwdscp ${1}.tar.gz
