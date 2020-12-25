@@ -6,4 +6,8 @@ if [ ! -n "$1" ];then
 fi
 
 PIDs=$(ps ux | grep "$1" | grep -v grep | awk '{print $2}')
-kill -9 $PIDs
+for pid in ${PIDs[@]};do
+    echo "kill $pid"
+    kill -9 $pid
+    sleep 0.5
+done

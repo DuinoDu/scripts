@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+suffix="*.py"
+
+if [ -n "$1" ];then
+    suffix="$1"
+fi
+
+find . -name "${suffix}" -exec wc -l  {} \; | awk '{s+=$1}END{print s}'

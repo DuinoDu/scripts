@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [ ! -n "$1" ];then
+    echo "pp [python lib name]"
+    exit 1
+fi
+
+python -c "import $1; print(${1}.__path__[0])"

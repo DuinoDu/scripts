@@ -1,0 +1,62 @@
+#!/bin/bash -e
+
+SED=
+if ! hash gsed 2>/dev/null;then
+    SED=sed
+else
+    SED=gsed
+fi
+
+if [ ! -n "$1" ];then
+    echo "Usage: createpl [project name]"
+    exit 1
+fi
+
+name=$1
+
+if [ -d $name ];then
+    read -p "$name exist, override? [y/N]" answer
+    if [[ $answer = "y" ]]; then
+        rm -rf $name
+    else
+        exit
+    fi
+fi
+
+git clone https://github.com/duinodu/mnist.pl $name
+
+cd $name
+rm -rf .git 
+
+libname=`echo $name | sed -e 's/-/_/g'`
+libname=${libname%.pl}
+
+year=`date +"%Y"`
+user=`whoami`
+
+function update() {
+    $SED -i -e "s/mnist_pl/${libname}/g" \
+            -e "s/USER/${user}/g" \
+            -e "s/YEAR/${year}/g" \
+            -e "s/PROJECT/${name}/g" \
+         $1
+}
+
+update setup.py
+update Makefile
+update pytest.ini
+update docs/index.rst
+update docs/conf.py 
+update src/mnist_pl/data_test.py
+update src/mnist_pl/model_test.py
+update scripts/train.py
+
+mv src/mnist_pl src/$libname
+git init
+git add .
+git commit -m 'init pl project'
+git branch -M main
+
+echo "Start hacking!"
+echo "  If you want to run mnist training,"
+echo "  run with make debug or make train."
