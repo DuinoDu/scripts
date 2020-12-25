@@ -9,7 +9,9 @@ from __future__ import print_function
 import argparse
 import os
 import sys
-import PIL.Image as Image
+from PIL import Image
+import numpy as np
+import cv2
 
 
 def main(args):
@@ -19,6 +21,9 @@ def main(args):
     imgs = []
     for imgfile in imgfiles:
         temp = Image.open(imgfile)
+        # img = np.array(temp)[:,:,::-1].copy()
+        # cv2.putText(img, os.path.splitext(imgfile)[0], (30, 30), cv2.FONT_HERSHEY_COMPLEX, 1, (0,0,255), 2)
+        # temp = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
         imgs.append(temp)
     imgs[0].save(args.output, save_all=True, append_images=imgs[1:], duration=args.duration, loop=args.loop)
 
