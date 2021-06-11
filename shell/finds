@@ -1,4 +1,4 @@
 #!/bin/bash
 
 #find . | xargs grep $1 -r
-grep -rnw . -e "$1" --color=always --binary-file=without-match
+grep -rnw . -e "$1" --color=always --binary-file=without-match $*

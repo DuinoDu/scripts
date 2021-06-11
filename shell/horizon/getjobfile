@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "get job file by [job name]"
+    exit 1
+fi
+
+hdfs=hdfs://hobot-bigdata-ucloud
+user=min.du
+password=fsdgogogo
+
+mkdir $1
+cd $1
+hdfs dfs -get ${hdfs}/user/${user}/platform/$1/job.tar.gz.enc
+(openssl enc -aes-256-cbc -d -in  ./*.enc -pass pass:${password} | tar xz -C ./)
+rm job.tar.gz.enc
