@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if [ ! -n "$1" ];then
+    echo "gsync {branch name}"
+    exit 1
+fi
+
+cur_branch=`git rev-parse --abbrev-ref HEAD`
+git checkout $1
+git pull origin $1
+git checkout ${cur_branch}
+git merge $1

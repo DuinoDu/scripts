@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "fast-git [action, such as clone] [url]"
+    exit 1
+fi
+prefix=https://github.com.cnpmjs.org
+name=`echo $2 | cut -d/ -f4-`
+git $1 $prefix/$name

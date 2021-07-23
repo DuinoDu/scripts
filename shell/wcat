@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ ! -n "$1" ];then
+    echo "wcat [remote log file]"
+    exit 1
+fi
+
+
+filename=tmp_`date +%Y-%m-%d_%H:%M:%S`.log
+wget $1 -O $filename --quiet
+cat $filename
+rm $filename
